@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;  
+}
+
+.input-wrapper {
+  width: 400px;
+  margin: 0 auto;
+  font-family: 'MuseoModerno', sans-serif;
+}
+
+label,
+.sub-msg-validation {
+  color: #999999;
+}
+
+label {
+  letter-spacing: 0.5px;
+  user-select: none;
+  font-weight: 100;
+  position: relative;
+  top: 25px;
+  transition: all 0.2s ease-in-out;
+}
+
+.sub-msg-validation {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400!important;
+  padding-right: 50px;
+  margin-top: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #3369F3;
+  padding: 10px 40px 10px 0;
+}
+
+input:active,
+input:focus {
+  border-bottom: 2px solid #3369F3;
+}
+
+.isActive {
+  font-size: 70%;
+  top: 5px;
+}
