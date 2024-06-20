@@ -1,6 +1,11 @@
 <form class="login-form">
-  {{> Title content="Вход"}}
+  <div class="wrapper-title-login">
+    {{> Title content="Вход"}}
+  </div>
   {{> Input name="login" labelValue="Логин" type="text" }}
   {{> Input name="password" labelValue="Пароль" type="password" }}
-  {{!-- <button type="submit">Submit</button> --}}
+  <div class="wrapper-submit-btn">
+    {{> Button buttonContent="Авторизоваться" }}
+    {{> Link linkContent="Нет аккаунта?" }}
+  </div>
 </form>
