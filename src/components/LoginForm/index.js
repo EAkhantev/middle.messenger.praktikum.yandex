@@ -6,6 +6,6 @@ export default LoginForm;
 Handlebars.registerHelper('LoginFields', () => {
   return [
     {name:"login", labelValue:"Логин", type:"text"},
-    {name:"password_confirm", labelValue:"Пароль (ещё раз)", type:"password"},
+    {name:"password", labelValue:"Пароль", type:"password"},
   ]
 });

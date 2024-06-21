@@ -34,20 +34,27 @@ const SignUpFormElem = SignUpFormFunc({
   linkContent: "Войти",
   className: "signupForm",
 });
-document.body.innerHTML = LoginFormElem;
+// document.body.innerHTML = LoginFormElem;
 // document.body.innerHTML = SignUpFormElem;
 document.body.innerHTML += SignUpFormElem;
 
 
 
 // Handle input focus
-const label = document.querySelector('label');
-const input = document.querySelector('input');
+document.addEventListener('focusin', (event) => {
+  const target = event.target;
 
-input.addEventListener("focusin", () => {
-  label.classList.add('isActive')
+  if (target.classList.contains('input-field')) {
+    const label = target.labels[0];
+    label.classList.add('isActive');
+  } 
 });
 
-input.addEventListener("focusout", () => {
-  if (input.value === '') label.classList.remove('isActive');
+document.addEventListener('focusout', (event) => {
+  const target = event.target;
+
+  if (target.classList.contains('input-field')) {
+    const label = target.labels[0];
+    if (target.value === '') label.classList.remove('isActive');
+  };
 });
