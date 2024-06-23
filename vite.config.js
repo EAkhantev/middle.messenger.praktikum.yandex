@@ -7,7 +7,5 @@ export default defineConfig({
   build: {
     outDir: resolve(__dirname, 'dist'),
   },
+  publicDir: resolve(__dirname, 'public'),
 });
-
-console.log(resolve(__dirname, 'dist'));
-
