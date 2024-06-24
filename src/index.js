@@ -1,27 +1,31 @@
 import Handlebars from 'handlebars';
+import ChatPage from './components/ChatPage'
+// import BasePage from './components/BasePage'
 import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
-// import FormTest from './components/FormTest'
 import Input from './components/Input'
 import Title from './components/Title'
 import Button from './components/Button'
 import Link from './components/Link'
 import Form from './components/Form'
+import ChatNav from './components/ChatNav'
+import ChatItem from './components/ChatItem'
 
-// const rootElement = document.getElementById('root');
-
-// const FormTestFunc = Handlebars.compile(FormTest);
-// const FormTestElem = FormTestFunc();
-// document.body.innerHTML = FormTestElem;
+const rootElement = document.getElementById('root');
 
 Handlebars.registerPartial('Title', Title);
 Handlebars.registerPartial('Input', Input);
 Handlebars.registerPartial('Button', Button);
 Handlebars.registerPartial('Link', Link);
 Handlebars.registerPartial('Form', Form);
+Handlebars.registerPartial('ChatNav', ChatNav);
+Handlebars.registerPartial('ChatItem', ChatItem);
 
+const ChatPageFunc = Handlebars.compile(ChatPage);
 const LoginFormFunc = Handlebars.compile(LoginForm);
 const SignUpFormFunc = Handlebars.compile(SignUpForm);
+
+const ChatPageElem = ChatPageFunc();
 const LoginFormElem = LoginFormFunc({
   titleContent: "Вход",
   buttonContent: "Авторизоваться",
@@ -34,10 +38,10 @@ const SignUpFormElem = SignUpFormFunc({
   linkContent: "Войти",
   className: "signupForm",
 });
-// document.body.innerHTML = LoginFormElem;
-// document.body.innerHTML = SignUpFormElem;
-document.body.innerHTML += SignUpFormElem;
 
+rootElement.innerHTML = ChatPageElem;
+// rootElement.innerHTML = LoginFormElem;
+// rootElement.innerHTML = SignUpFormElem;
 
 
 // Handle input focus
