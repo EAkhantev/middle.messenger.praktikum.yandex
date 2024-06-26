@@ -1,6 +1,6 @@
 import Handlebars from 'handlebars';
 import ChatPage from './components/ChatPage'
-// import BasePage from './components/BasePage'
+import ProfilePage from './components/ProfilePage'
 import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
 import Input from './components/Input'
@@ -10,6 +10,11 @@ import Link from './components/Link'
 import Form from './components/Form'
 import ChatNav from './components/ChatNav'
 import ChatItem from './components/ChatItem'
+import BtnHideSide from './components/BtnHideSide'
+import ProfileAvatar from './components/ProfileAvatar'
+import ProfileInput from './components/ProfileInput'
+import ProfileAction from './components/ProfileAction'
+import ProfileForm from './components/ProfileForm'
 
 const rootElement = document.getElementById('root');
 
@@ -20,11 +25,18 @@ Handlebars.registerPartial('Link', Link);
 Handlebars.registerPartial('Form', Form);
 Handlebars.registerPartial('ChatNav', ChatNav);
 Handlebars.registerPartial('ChatItem', ChatItem);
+Handlebars.registerPartial('BtnHideSide', BtnHideSide);
+Handlebars.registerPartial('ProfileAvatar', ProfileAvatar);
+Handlebars.registerPartial('ProfileInput', ProfileInput);
+Handlebars.registerPartial('ProfileAction', ProfileAction);
+Handlebars.registerPartial('ProfileForm', ProfileForm);
 
+const ProfilePageFunc = Handlebars.compile(ProfilePage);
 const ChatPageFunc = Handlebars.compile(ChatPage);
 const LoginFormFunc = Handlebars.compile(LoginForm);
 const SignUpFormFunc = Handlebars.compile(SignUpForm);
 
+const ProfilePageElem = ProfilePageFunc();
 const ChatPageElem = ChatPageFunc();
 const LoginFormElem = LoginFormFunc({
   titleContent: "Вход",
@@ -39,7 +51,8 @@ const SignUpFormElem = SignUpFormFunc({
   className: "signupForm",
 });
 
-rootElement.innerHTML = ChatPageElem;
+rootElement.innerHTML = ProfilePageElem;
+// rootElement.innerHTML = ChatPageElem;
 // rootElement.innerHTML = LoginFormElem;
 // rootElement.innerHTML = SignUpFormElem;
 
