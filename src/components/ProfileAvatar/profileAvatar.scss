@@ -1,0 +1,24 @@
+.wrapper-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 21px;
+  
+  .avatar {
+    width: 130px;
+    height: 130px;
+    background-color: #EFEFEF;
+    border-radius: 50%;
+    background-image: url(../../assets/avatar_default.svg);
+    background-repeat: no-repeat;
+    background-position: center center; 
+  }
+  
+  .avatar-title {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    color: #1e1e1e;
+  }
+}
