@@ -1,10 +1,12 @@
 import Handlebars from 'handlebars';
+
 import ChatPage from './components/ChatPage'
 import ProfilePage from './components/ProfilePage'
 import LoginForm from './components/LoginForm'
 import SignUpForm from './components/SignUpForm'
-import Input from './components/Input'
+
 import Title from './components/Title'
+import Input from './components/Input'
 import Button from './components/Button'
 import Link from './components/Link'
 import Form from './components/Form'
@@ -15,6 +17,7 @@ import ProfileAvatar from './components/ProfileAvatar'
 import ProfileInput from './components/ProfileInput'
 import ProfileAction from './components/ProfileAction'
 import ProfileForm from './components/ProfileForm'
+import ErrorPage from './components/ErrorPage'
 
 const rootElement = document.getElementById('root');
 
@@ -31,13 +34,14 @@ Handlebars.registerPartial('ProfileInput', ProfileInput);
 Handlebars.registerPartial('ProfileAction', ProfileAction);
 Handlebars.registerPartial('ProfileForm', ProfileForm);
 
-const ProfilePageFunc = Handlebars.compile(ProfilePage);
 const ChatPageFunc = Handlebars.compile(ChatPage);
+const ProfilePageFunc = Handlebars.compile(ProfilePage);
 const LoginFormFunc = Handlebars.compile(LoginForm);
 const SignUpFormFunc = Handlebars.compile(SignUpForm);
+const ErrorPageFunc = Handlebars.compile(ErrorPage);
 
-const ProfilePageElem = ProfilePageFunc();
 const ChatPageElem = ChatPageFunc();
+const ProfilePageElem = ProfilePageFunc();
 const LoginFormElem = LoginFormFunc({
   titleContent: "Вход",
   buttonContent: "Авторизоваться",
@@ -50,11 +54,24 @@ const SignUpFormElem = SignUpFormFunc({
   linkContent: "Войти",
   className: "signupForm",
 });
+const Page404 = ErrorPageFunc({
+  errorTitle: "404",
+  errorDescription: "Не туда попали",
+  linkContent: "Назад к чатам"
+});
+const Page500 = ErrorPageFunc({
+  errorTitle: "500",
+  errorDescription: "Мы уже фиксим",
+  linkContent: "Назад к чатам"
+});
 
-rootElement.innerHTML = ProfilePageElem;
 // rootElement.innerHTML = ChatPageElem;
+// rootElement.innerHTML = ProfilePageElem;
 // rootElement.innerHTML = LoginFormElem;
 // rootElement.innerHTML = SignUpFormElem;
+rootElement.innerHTML = Page404;
+// rootElement.innerHTML = Page500;
+
 
 
 // Handle input focus
