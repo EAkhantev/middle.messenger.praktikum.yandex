@@ -44,7 +44,7 @@ const ChatPageElem = ChatPageFunc();
 const ProfilePageElem = ProfilePageFunc();
 const LoginFormElem = LoginFormFunc({
   titleContent: "Вход",
-  buttonContent: "Авторизоваться",
+  buttonContent: "Войти",
   linkContent: "Нет аккаунта?",
   className: "loginForm",
 });
