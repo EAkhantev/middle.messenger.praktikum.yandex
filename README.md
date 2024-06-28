@@ -1,4 +1,4 @@
-**Messenger App**
+**Funny Web Messenger**
 ================
 
 **Design Prototype**
