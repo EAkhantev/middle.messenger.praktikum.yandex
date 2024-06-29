@@ -1,0 +1,50 @@
+.input-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  color: #999999;
+  font-size: 0;
+  margin-bottom: 9px;
+  
+  label {
+    letter-spacing: 0.5px;
+    user-select: none;
+    position: relative;
+    top: 23px;
+    transition: all 0.2s ease-in-out;
+    font-size: 13px;
+    line-height: 13px;
+  }
+  
+  input {
+    width: 100%;
+    letter-spacing: 0.5px;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #1e1e1e;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #3369F3;
+    padding: 10px 40px 4px 0;
+  }
+  
+  input:active,
+  input:focus {
+    border-bottom: 2px solid #3369F3;
+  }
+  
+  .sub-msg-validation {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400!important;
+    padding-right: 50px;
+    margin-top: 20px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .isActive {
+    font-weight: 500;
+    font-size: 9px;
+    top: 5px;
+  }
+}
