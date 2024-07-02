@@ -1,0 +1,16 @@
+.edit-panel-item {
+  border-bottom: 1px solid #EAEAEA;
+  padding-bottom: 10px;
+
+  a {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #3369f3;
+    text-decoration: none;
+  }
+}
+
+.edit-panel-item:last-child {
+  border-bottom: none;
+}
