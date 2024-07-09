@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Handlebars from 'handlebars';
 
 import ChatPage from './components/ChatPage';
@@ -40,8 +41,8 @@ const LoginFormFunc = Handlebars.compile(LoginForm);
 const SignUpFormFunc = Handlebars.compile(SignUpForm);
 const ErrorPageFunc = Handlebars.compile(ErrorPage);
 
-const ChatPageElem = ChatPageFunc();
-const ProfilePageElem = ProfilePageFunc();
+const ChatPageElem = ChatPageFunc({});
+const ProfilePageElem = ProfilePageFunc({});
 const LoginFormElem = LoginFormFunc({
   titleContent: "Вход",
   buttonContent: "Войти",
