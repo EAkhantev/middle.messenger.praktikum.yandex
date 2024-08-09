@@ -63,12 +63,12 @@ export default class Block {
     return true;
   }
 
-  setProps = (nextProps) => {
+  setProps(nextProps) {
     if (!nextProps) return;
 
     const oldProps = { ...this.props };
     Object.assign(this.props, nextProps);
-    // this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, nextProps);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, nextProps);
   };
 
   get element() {
@@ -77,7 +77,7 @@ export default class Block {
 
   _render() {
     const block = this.render();
-    console.log(block);
+    // console.log(block);
     
     // Этот небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
@@ -85,11 +85,6 @@ export default class Block {
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     this._element.innerHTML = block;
   }
-  
-  // _render() {
-  //   const template = compile(this.render());
-  //   this._element.innerHTML = template(this.props);
-  // }
 
   render() {}
 

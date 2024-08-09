@@ -36,4 +36,8 @@ export default class TestForm extends Block {
       link: this.props.link.render(),
     });
   }
+
+  update() {
+    this._element.innerHTML = this.render();
+  }
 }

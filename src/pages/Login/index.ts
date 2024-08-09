@@ -22,7 +22,6 @@ export default class Login extends Block {
     });
     
     super('div', { loginForm: loginForm });
-    
   }
 
   render() {
@@ -33,4 +32,7 @@ export default class Login extends Block {
     });
   }
 
+  update() {
+    this._element.innerHTML = this.render();
+  }
 }

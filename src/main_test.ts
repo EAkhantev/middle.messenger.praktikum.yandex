@@ -10,6 +10,5 @@ setTimeout(() => {
   loginPage.props.loginForm.props.button.setProps({
     buttonContent: 'Войти',
   });
-  loginPage.props.loginForm.props.button.update();
   loginPage._element.innerHTML = loginPage.render();
 }, 3000); 

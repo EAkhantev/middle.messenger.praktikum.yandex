@@ -1,11 +1,10 @@
-// @ts-nocheck
 import './input.scss';
 import Block from "../../utils/Block";
 import Handlebars from 'handlebars';
 import InputTemplate from './input.hbs?raw';
 
 export default class TestInput extends Block {
-  constructor({...props}) {
+  constructor(props) {
     super("div", {...props});
   }
 
@@ -15,6 +14,8 @@ export default class TestInput extends Block {
   }
   
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
+    // this._element.innerHTML = this.render();
   }
 }
