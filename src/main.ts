@@ -1,10 +1,12 @@
 // @ts-nocheck
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Chat from "./pages/Chat";
 
 const rootElement = document.getElementById('root');
 const loginPage = new Login();
 const signupPage = new Signup();
+const chatPage = new Chat();
 
 const setPage = (path) => {
   switch (path) {
@@ -15,7 +17,7 @@ const setPage = (path) => {
       rootElement.replaceChildren(signupPage.getContent());
       break;
     case '/chat':
-      rootElement.replaceChildren(document.createTextNode('chat'));
+      rootElement.replaceChildren(chatPage.getContent());
       break;
     case '/profile':
       rootElement.replaceChildren(document.createTextNode('profile'));
