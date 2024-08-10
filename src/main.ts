@@ -2,11 +2,15 @@
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Chat from "./pages/Chat";
+import Page404 from "./pages/Page404";
+import Page500 from "./pages/Page500";
 
 const rootElement = document.getElementById('root');
 const loginPage = new Login();
 const signupPage = new Signup();
 const chatPage = new Chat();
+const page404 = new Page404();
+const page500 = new Page500();
 
 const setPage = (path) => {
   switch (path) {
@@ -23,10 +27,10 @@ const setPage = (path) => {
       rootElement.replaceChildren(document.createTextNode('profile'));
       break;
     case '/page404':
-      rootElement.replaceChildren(document.createTextNode('page404'));
+      rootElement.replaceChildren(page404.getContent());
       break;
     case '/page500':
-      rootElement.replaceChildren(document.createTextNode('page500'));
+      rootElement.replaceChildren(page500.getContent());
       break;
     default:
       rootElement.replaceChildren(document.createTextNode(''));
