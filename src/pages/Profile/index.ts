@@ -1,11 +1,11 @@
 // @ts-nocheck
 import './profile.scss';
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import ProfileTemplate from './profile.hbs?raw';
 
-import Icon from '../../components/Icon';
-import ProfileForm from '../../components/ProfileForm';
+import Icon from '../../components/UI/Icon';
+import ProfileForm from '../../components/profile/ProfileForm';
 
 export default class Profile extends Block {
 

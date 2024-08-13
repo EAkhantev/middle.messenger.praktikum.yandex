@@ -1,5 +1,5 @@
 // @ts-nocheck
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import Page500Template from './page500.hbs?raw';
 

@@ -1,17 +1,17 @@
 // @ts-nocheck
-import './title.scss';
-import Block from "../../utils/Block";
+import './input.scss';
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
-import TitleTemplate from './title.hbs?raw';
+import InputTemplate from './input.hbs?raw';
 
-export default class Title extends Block {
+export default class Input extends Block {
 
   constructor(props) {
     super("div", props);
   }
 
   render() {
-    const template = Handlebars.compile(TitleTemplate);
+    const template = Handlebars.compile(InputTemplate);
     return template(this.props);
   }
   

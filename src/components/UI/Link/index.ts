@@ -1,17 +1,17 @@
 // @ts-nocheck
-import './icon.scss';
-import Block from "../../utils/Block";
+import './link.scss';
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
-import IconTemplate from './icon.hbs?raw';
+import LinkTemplate from './link.hbs?raw';
 
-export default class Icon extends Block {
+export default class Link extends Block {
 
   constructor(props) {
     super("div", props);
   }
 
   render() {
-    const template = Handlebars.compile(IconTemplate);
+    const template = Handlebars.compile(LinkTemplate);
     return template(this.props);
   }
   

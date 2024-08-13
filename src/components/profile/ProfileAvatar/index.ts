@@ -1,6 +1,6 @@
 // @ts-nocheck
 import './profileAvatar.scss';
-import Block from "../../utils/Block";
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
 import ProfileAvatarTemplate from './profileAvatar.hbs?raw';
 

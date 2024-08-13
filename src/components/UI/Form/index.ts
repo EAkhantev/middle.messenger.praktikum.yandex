@@ -1,6 +1,6 @@
 // @ts-nocheck
 import './form.scss';
-import Block from "../../utils/Block";
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
 import FormTemplate from './form.hbs?raw';
 

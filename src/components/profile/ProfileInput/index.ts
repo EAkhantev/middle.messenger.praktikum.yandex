@@ -1,6 +1,6 @@
 // @ts-nocheck
 import './profileInput.scss';
-import Block from "../../utils/Block";
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
 import ProfileInputTemplate from './profileInput.hbs?raw';
 

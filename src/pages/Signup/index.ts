@@ -1,10 +1,10 @@
 // @ts-nocheck
 import './signup.scss';
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import SignupTemplate from './signup.hbs?raw';
 
-import TestForm from '../../components/Form';
+import TestForm from '../../components/UI/Form';
 
 export default class Signup extends Block {
 

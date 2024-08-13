@@ -1,11 +1,11 @@
 // @ts-nocheck
 import './chat.scss';
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import ChatTemplate from './chat.hbs?raw';
 
-import ChatNav from '../../components/ChatNav';
-import ChatItem from '../../components/ChatItem';
+import ChatNav from '../../components/chat/ChatNav';
+import ChatItem from '../../components/chat/ChatItem';
 
 export default class Chat extends Block {
 

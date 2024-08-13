@@ -1,10 +1,10 @@
 // @ts-nocheck
 import './profileAction.scss';
-import Block from "../../utils/Block";
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
 import ProfileActionTemplate from './profileAction.hbs?raw';
 
-import Link from '../Link';
+import Link from '../../UI/Link';
 
 export default class ProfileAction extends Block {
 

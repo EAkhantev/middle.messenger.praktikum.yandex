@@ -1,17 +1,17 @@
 // @ts-nocheck
-import './chatItem.scss';
-import Block from "../../utils/Block";
+import './title.scss';
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
-import ChatItemTemplate from './chatItem.hbs?raw';
+import TitleTemplate from './title.hbs?raw';
 
-export default class ChatItem extends Block {
+export default class Title extends Block {
 
   constructor(props) {
     super("div", props);
   }
 
   render() {
-    const template = Handlebars.compile(ChatItemTemplate);
+    const template = Handlebars.compile(TitleTemplate);
     return template(this.props);
   }
   

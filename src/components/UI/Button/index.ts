@@ -1,6 +1,6 @@
 // @ts-nocheck
 import './button.scss';
-import Block from "../../utils/Block";
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
 import ButtonTemplate from './button.hbs?raw';
 

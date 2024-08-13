@@ -1,10 +1,10 @@
 // @ts-nocheck
 import './error.scss';
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import ErrorTemplate from './error.hbs?raw';
 
-import TestLink from '../Link';
+import TestLink from '../UI/Link';
 
 export default class Error extends Block {
 

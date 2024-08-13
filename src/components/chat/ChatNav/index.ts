@@ -1,17 +1,17 @@
 // @ts-nocheck
-import './input.scss';
-import Block from "../../utils/Block";
+import './chatNav.scss';
+import Block from '../../../utils/Block';
 import Handlebars from 'handlebars';
-import InputTemplate from './input.hbs?raw';
+import ChatNavTemplate from './chatNav.hbs?raw';
 
-export default class Input extends Block {
+export default class ChatNav extends Block {
 
   constructor(props) {
     super("div", props);
   }
 
   render() {
-    const template = Handlebars.compile(InputTemplate);
+    const template = Handlebars.compile(ChatNavTemplate);
     return template(this.props);
   }
   

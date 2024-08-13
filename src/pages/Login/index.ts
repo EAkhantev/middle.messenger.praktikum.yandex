@@ -1,10 +1,10 @@
 // @ts-nocheck
 import './login.scss';
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import LoginTemplate from './login.hbs?raw';
 
-import TestForm from '../../components/Form';
+import TestForm from '../../components/UI/Form';
 
 export default class Login extends Block {
 
