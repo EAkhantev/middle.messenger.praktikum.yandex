@@ -8,7 +8,9 @@ import Icon from '../../components/Icon';
 import ProfileForm from '../../components/ProfileForm';
 
 export default class Profile extends Block {
+
   constructor(props) {
+    const profileAvatarProps = { avatarTitle: 'Олег Захаров' };
     const profileFieldProps = [
       {fieldName:"email", labelValue:"Почта", fieldType:"email", defaultValue:"yandex@gmail.com", isDisable:true},
       {fieldName:"login", labelValue:"Логин", fieldType:"text", defaultValue:"ivanivanov", isDisable:true},
@@ -16,22 +18,22 @@ export default class Profile extends Block {
       {fieldName:"second_name", labelValue:"Фамилия", fieldType:"text", defaultValue:"Маск", isDisable:true},
       {fieldName:"display_name", labelValue:"Имя в чате", fieldType:"text", defaultValue:"pussyTamer71", isDisable:true},
       {fieldName:"phone", labelValue:"Телефон", fieldType:"tel", defaultValue:"+7 (909) 975 58 13", isDisable:true},
-    ]
+    ];
     const profileActionProps = [
       {linkContent:"Изменить данные", href:"login"},
       {linkContent:"Изменить пароль", href:"password"},
       {linkContent:"Выйти", href:"password"},
-    ]
-    const hideBtn = new Icon();
+    ];
+    const btnHideSide = new Icon();
     const profileForm = new ProfileForm({
-      avatar: 'Олег Захаров',
+      avatar: profileAvatarProps,
       fields: profileFieldProps,
       actions: profileActionProps,
     })
     
     super('div', { 
-      btnHideSide: hideBtn,
-      profileForm: profileForm,
+      btnHideSide,
+      profileForm,
     });
   }
 
@@ -45,6 +47,7 @@ export default class Profile extends Block {
   }
 
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
   }
 }

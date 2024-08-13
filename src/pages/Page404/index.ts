@@ -8,13 +8,13 @@ import Error from "../../components/Error";
 export default class Page404 extends Block {
 
   constructor(props) {
-    const pageNotFound = new Error({
+    const page404 = new Error({
       errorTitle: '404',
       errorDescription: 'Не туда попали',
       link: {linkContent: 'Назад к чатам', href: '/chat'},
     });
     
-    super('div', { page404: pageNotFound });
+    super('div', { page404 });
   }
 
   render() {
@@ -26,6 +26,7 @@ export default class Page404 extends Block {
   }
 
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
   }
 }

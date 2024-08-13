@@ -5,6 +5,7 @@ import Handlebars from 'handlebars';
 import IconTemplate from './icon.hbs?raw';
 
 export default class Icon extends Block {
+
   constructor(props) {
     super("div", props);
   }
@@ -15,6 +16,7 @@ export default class Icon extends Block {
   }
   
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
   }
 }

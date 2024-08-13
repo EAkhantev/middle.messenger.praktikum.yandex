@@ -8,6 +8,7 @@ import ChatNav from '../../components/ChatNav';
 import ChatItem from '../../components/ChatItem';
 
 export default class Chat extends Block {
+
   constructor(props) {
     const chatItemProps = [
       {
@@ -49,10 +50,13 @@ export default class Chat extends Block {
         msgCount: '12',
       },
     ]
-    const chatSearch = new ChatNav();
-    const chatItems = chatItemProps.map((item) => new ChatItem(item));
+    const chatNav = new ChatNav();
+    const contactItems = chatItemProps.map((item) => new ChatItem(item));
     
-    super('div', { chatNav: chatSearch, contactItems: chatItems});
+    super('div', {
+      chatNav, 
+      contactItems,
+    });
   }
 
   render() {
@@ -65,6 +69,7 @@ export default class Chat extends Block {
   }
 
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
   }
 }

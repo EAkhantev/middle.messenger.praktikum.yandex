@@ -4,7 +4,7 @@ import Block from "../../utils/Block";
 import Handlebars from 'handlebars';
 import LoginTemplate from './login.hbs?raw';
 
-import TestForm from '../../components/TestForm';
+import TestForm from '../../components/Form';
 
 export default class Login extends Block {
 
@@ -21,7 +21,7 @@ export default class Login extends Block {
       link: { linkContent: 'Нет аккаунта?' },
     });
     
-    super('div', { loginForm: loginForm });
+    super('div', { loginForm });
   }
 
   render() {
@@ -33,6 +33,7 @@ export default class Login extends Block {
   }
 
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
   }
 }

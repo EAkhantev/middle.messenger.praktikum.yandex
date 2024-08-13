@@ -5,8 +5,9 @@ import Handlebars from 'handlebars';
 import ChatItemTemplate from './chatItem.hbs?raw';
 
 export default class ChatItem extends Block {
+
   constructor(props) {
-    super("div", {...props});
+    super("div", props);
   }
 
   render() {
@@ -17,6 +18,5 @@ export default class ChatItem extends Block {
   update() {
     this._createResources();
     this._render();
-    // this._element.innerHTML = this.render();
   }
 }

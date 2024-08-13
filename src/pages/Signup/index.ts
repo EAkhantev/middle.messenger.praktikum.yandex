@@ -4,7 +4,7 @@ import Block from "../../utils/Block";
 import Handlebars from 'handlebars';
 import SignupTemplate from './signup.hbs?raw';
 
-import TestForm from '../../components/TestForm';
+import TestForm from '../../components/Form';
 
 export default class Signup extends Block {
 
@@ -25,7 +25,7 @@ export default class Signup extends Block {
       link: { linkContent: 'Войти' },
     });
     
-    super('div', { signupForm: signupForm });
+    super('div', { signupForm });
   }
 
   render() {

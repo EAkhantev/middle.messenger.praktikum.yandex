@@ -5,8 +5,9 @@ import Handlebars from 'handlebars';
 import ChatNavTemplate from './chatNav.hbs?raw';
 
 export default class ChatNav extends Block {
+
   constructor(props) {
-    super("div", {...props});
+    super("div", props);
   }
 
   render() {
@@ -17,6 +18,5 @@ export default class ChatNav extends Block {
   update() {
     this._createResources();
     this._render();
-    // this._element.innerHTML = this.render();
   }
 }

@@ -4,14 +4,12 @@ import Block from "../../utils/Block";
 import Handlebars from 'handlebars';
 import ProfileActionTemplate from './profileAction.hbs?raw';
 
-import TestLink from '../TestLink';
+import Link from '../Link';
 
 export default class ProfileAction extends Block {
 
-  constructor(props) {
-    console.log(props);
-    
-    const link = new TestLink(props);
+  constructor(props) {    
+    const link = new Link(props);
 
     super('div', {
       link,

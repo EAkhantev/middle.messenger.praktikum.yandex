@@ -4,12 +4,13 @@ import Block from "../../utils/Block";
 import Handlebars from 'handlebars';
 import ErrorTemplate from './error.hbs?raw';
 
-import TestLink from '../TestLink';
+import TestLink from '../Link';
 
 export default class Error extends Block {
-  constructor(props) {
 
+  constructor(props) {
     const link = new TestLink(props.link);
+
     super("div", {
       errorTitle: props.errorTitle,
       errorDescription: props.errorDescription,
@@ -26,6 +27,7 @@ export default class Error extends Block {
   }
   
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
   }
 }

@@ -9,7 +9,7 @@ import ProfileInput from '../ProfileInput';
 import ProfileAction from '../ProfileAction';
 
 export default class ProfileForm extends Block {
-  
+
   constructor(props) {
     const avatar = new ProfileAvatar(props.avatar);
     const fields = props.fields.map((field) => new ProfileInput(field));
@@ -33,6 +33,7 @@ export default class ProfileForm extends Block {
   }
 
   update() {
-    this._element.innerHTML = this.render();
+    this._createResources();
+    this._render();
   }
 }
