@@ -1,23 +1,38 @@
-import Handlebars from 'handlebars';
+// @ts-nocheck
 import './profileForm.scss';
-import ProfileForm from './profileForm.hbs?raw';
-export default ProfileForm;
+import Block from "../../utils/Block";
+import Handlebars from 'handlebars';
+import ProfileFormTemplate from './profileForm.hbs?raw';
 
-Handlebars.registerHelper('ProfileInputs', () => {
-  return [
-    {fieldName:"email", labelValue:"Почта", fieldType:"email", defaultValue:"yandex@gmail.com", isDisable:true},
-    {fieldName:"login", labelValue:"Логин", fieldType:"text", defaultValue:"ivanivanov", isDisable:true},
-    {fieldName:"first_name", labelValue:"Имя", fieldType:"text", defaultValue:"Илон", isDisable:true},
-    {fieldName:"second_name", labelValue:"Фамилия", fieldType:"text", defaultValue:"Маск", isDisable:true},
-    {fieldName:"display_name", labelValue:"Имя в чате", fieldType:"text", defaultValue:"pussyTamer71", isDisable:true},
-    {fieldName:"phone", labelValue:"Телефон", fieldType:"tel", defaultValue:"+7 (909) 975 58 13", isDisable:true},
-  ]
-});
+import ProfileAvatar from '../ProfileAvatar';
+import ProfileInput from '../ProfileInput';
+import ProfileAction from '../ProfileAction';
 
-Handlebars.registerHelper('ProfileActions', () => {
-  return [
-    {actionName:"Изменить данные", actionLink:"login"},
-    {actionName:"Изменить пароль", actionLink:"password"},
-    {actionName:"Выйти", actionLink:"password"},
-  ]
-});
+export default class ProfileForm extends Block {
+  
+  constructor(props) {
+    const avatar = new ProfileAvatar(props.avatar);
+    const fields = props.fields.map((field) => new ProfileInput(field));
+    const actions = props.actions.map((action) => new ProfileAction(action));
+
+    super('div', {
+      avatar,
+      fields,
+      actions,
+    });
+  }
+
+  render() {
+    const template = Handlebars.compile(ProfileFormTemplate)
+    return template({
+      ...this.props,
+      profileAvatar: this.props.avatar.render(),
+      profileInputs: this.props.fields.map((field) => field.render()),
+      profileActions: this.props.actions.map((action) => action.render()),
+    });
+  }
+
+  update() {
+    this._element.innerHTML = this.render();
+  }
+}
