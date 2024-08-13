@@ -2,6 +2,7 @@
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Chat from "./pages/Chat";
+import Profile from "./pages/Profile";
 import Page404 from "./pages/Page404";
 import Page500 from "./pages/Page500";
 
@@ -9,6 +10,7 @@ const rootElement = document.getElementById('root');
 const loginPage = new Login();
 const signupPage = new Signup();
 const chatPage = new Chat();
+const profile = new Profile();
 const page404 = new Page404();
 const page500 = new Page500();
 
@@ -24,7 +26,7 @@ const setPage = (path) => {
       rootElement.replaceChildren(chatPage.getContent());
       break;
     case '/profile':
-      rootElement.replaceChildren(document.createTextNode('profile'));
+      rootElement.replaceChildren(profile.getContent());
       break;
     case '/page404':
       rootElement.replaceChildren(page404.getContent());
