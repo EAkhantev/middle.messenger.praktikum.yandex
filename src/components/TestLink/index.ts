@@ -5,8 +5,8 @@ import Handlebars from 'handlebars';
 import LinkTemplate from './link.hbs?raw';
 
 export default class TestLink extends Block {
-  constructor({...props}) {
-    super("a", {...props});
+  constructor(props) {
+    super("a", props);
   }
 
   render() {

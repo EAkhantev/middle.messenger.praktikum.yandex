@@ -1,3 +1,4 @@
+// @ts-nocheck
 import './input.scss';
 import Block from "../../utils/Block";
 import Handlebars from 'handlebars';
