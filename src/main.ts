@@ -7,6 +7,8 @@ import Page404 from "./pages/Page404";
 import Page500 from "./pages/Page500";
 
 const rootElement = document.getElementById('root');
+const navigation = document.querySelector('.page-list');
+
 const loginPage = new Login();
 const signupPage = new Signup();
 const chatPage = new Chat();
@@ -45,14 +47,15 @@ window.addEventListener('DOMContentLoaded', () => {
   setPage(path);
 });
 
-window.addEventListener('click', (event) => {
+navigation.addEventListener('click', (event) => {
   event.preventDefault();
   const target = event.target;
+  // console.log('click', target);
 
   if (target.classList.contains('route-link')) {
     const href = target.getAttribute('href');
     window.history.pushState({}, '', href);
-    setPage(href)
+    setPage(href);
   }
 });
 
