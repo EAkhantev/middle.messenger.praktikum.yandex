@@ -11,11 +11,11 @@ export default class Signup extends Block {
   constructor(props) {
     const fieldProps = [
       {name:"login", labelValue:"Логин", type:"text"},
-      {name:"first_name", labelValue:"Имя", type:"text"},
+      {name:"first_name", labelValue:"Имя", type:"text", autocomplete: "off"},
       {name:"second_name", labelValue:"Фамилия", type:"text"},
       {name:"phone", labelValue:"Телефон", type:"tel", autocomplete: "off" },
-      {name:"password", labelValue:"Пароль", type:"password", autocomplete:"new-password"},
-      {name:"password_confirm", labelValue:"Пароль (ещё раз)", type:"conf-password"},
+      {name:"password", labelValue:"Пароль", type:"password", autocomplete:"off"},
+      {name:"password_confirm", labelValue:"Пароль (ещё раз)", type:"password", autocomplete:"off"},
     ]
     const signupForm = new TestForm({
       className: 'signupForm',
