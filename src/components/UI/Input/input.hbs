@@ -1,5 +1,13 @@
 <div class="input-wrapper">
   <label for="{{ name }}">{{ labelValue }}</label>
-  <input type="{{ type }}" id="{{ name }}" name="{{ name }}" class="input-field">
+  <input 
+    class="input-field"
+    type="{{ type }}"
+    id="{{ name }}"
+    name="{{ name }}"
+    {{#if autocomplete}} 
+      autocomplete="{{ autocomplete }}" 
+    {{/if}}
+  >
   <p class="sub-msg-{{ name }}"></p>
 </div>

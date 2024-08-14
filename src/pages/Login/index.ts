@@ -10,8 +10,8 @@ export default class Login extends Block {
 
   constructor(props) {
     const fieldProps = [
-      { name: 'login', type: 'text', labelValue: 'Логин' },
-      { name: 'password', type: 'password', labelValue: 'Пароль' },
+      { name: 'login', type: 'text', labelValue: 'Логин', autocomplete: 'off' },
+      { name: 'password', type: 'password', labelValue: 'Пароль', autocomplete: 'new-password' },
     ]
     const loginForm = new TestForm({
       className: 'loginForm',
