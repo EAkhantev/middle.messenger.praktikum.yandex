@@ -7,16 +7,10 @@ import InputTemplate from './input.hbs?raw';
 export default class Input extends Block {
 
   constructor(props) {
-    super("div", props);
+    super(props);
   }
 
   render() {
-    const template = Handlebars.compile(InputTemplate);
-    return template(this.props);
-  }
-  
-  update() {
-    this._createResources();
-    this._render();
+    return InputTemplate;
   }
 }

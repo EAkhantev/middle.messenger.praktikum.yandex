@@ -10,24 +10,24 @@ import Error from "./components/Error";
 const rootElement = document.getElementById('root');
 const navigation = document.querySelector('.page-list');
 
-// const loginPage = new Login();
-// const signupPage = new Signup();
-// const chatPage = new Chat();
+const loginPage = new Login();
+const signupPage = new Signup();
+const chatPage = new Chat();
 const profile = new Profile();
 const page404 = new Page404();
 const page500 = new Page500();
 
 const setPage = (path) => {
   switch (path) {
-    // case '/login':
-    //   rootElement.replaceChildren(loginPage.getContent());
-    //   break;
-    // case '/signup':
-    //   rootElement.replaceChildren(signupPage.getContent());
-    //   break;
-    // case '/chat':
-    //   rootElement.replaceChildren(chatPage.getContent());
-    //   break;
+    case '/login':
+      rootElement.replaceChildren(loginPage.getContent());
+      break;
+    case '/signup':
+      rootElement.replaceChildren(signupPage.getContent());
+      break;
+    case '/chat':
+      rootElement.replaceChildren(chatPage.getContent());
+      break;
     case '/profile':
       rootElement.replaceChildren(profile.getContent());
       break;

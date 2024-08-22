@@ -7,16 +7,10 @@ import ChatNavTemplate from './chatNav.hbs?raw';
 export default class ChatNav extends Block {
 
   constructor(props) {
-    super("div", props);
+    super(props);
   }
 
   render() {
-    const template = Handlebars.compile(ChatNavTemplate);
-    return template(this.props);
-  }
-  
-  update() {
-    this._createResources();
-    this._render();
+    return ChatNavTemplate;
   }
 }

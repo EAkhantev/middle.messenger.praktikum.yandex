@@ -8,7 +8,7 @@ import Error from "../../components/Error";
 export default class Page500 extends Block {
 
   constructor(props) {
-    const error = new Error({
+    const page500 = new Error({
       errorTitle: '500',
       errorDescription: 'Мы уже фиксим',
       link: {linkContent: 'Назад к чатам', href: '/chat'},
@@ -16,7 +16,7 @@ export default class Page500 extends Block {
     
     super({
       // ...props,
-      page500: error,
+      page500,
     });
   }
 

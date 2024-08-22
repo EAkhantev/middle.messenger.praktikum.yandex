@@ -7,16 +7,10 @@ import ButtonTemplate from './button.hbs?raw';
 export default class Button extends Block {
 
   constructor(props) {
-    super("div", props);
+    super(props);
   }
 
   render() {
-    const template = Handlebars.compile(ButtonTemplate);
-    return template(this.props);
-  }
-  
-  update() {
-    this._createResources();
-    this._render();
+    return ButtonTemplate;
   }
 }

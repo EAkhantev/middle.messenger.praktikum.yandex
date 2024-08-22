@@ -4,7 +4,7 @@ import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import LoginTemplate from './login.hbs?raw';
 
-import TestForm from '../../components/UI/Form';
+import Form from '../../components/UI/Form';
 
 export default class Login extends Block {
 
@@ -13,7 +13,7 @@ export default class Login extends Block {
       { name: 'login', type: 'text', labelValue: 'Логин', autocomplete: 'off' },
       { name: 'password', type: 'password', labelValue: 'Пароль', autocomplete: 'new-password' },
     ]
-    const loginForm = new TestForm({
+    const loginForm = new Form({
       className: 'loginForm',
       title: { titleContent: 'Вход' },
       fields: fieldProps,
@@ -21,19 +21,12 @@ export default class Login extends Block {
       link: { linkContent: 'Нет аккаунта?' },
     });
     
-    super('div', { loginForm });
-  }
-
-  render() {
-    const template = Handlebars.compile(LoginTemplate)
-    return template({
-      ...this.props,
-      loginForm: this.props.loginForm.render(),
+    super({ 
+      loginForm,
     });
   }
 
-  update() {
-    this._createResources();
-    this._render();
+  render() {
+    return LoginTemplate;
   }
 }

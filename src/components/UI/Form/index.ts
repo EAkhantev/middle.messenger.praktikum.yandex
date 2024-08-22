@@ -17,7 +17,7 @@ export default class Form extends Block {
     const button = new Button(props.button);
     const link = new Link(props.link);
 
-    super('div', {
+    super({
       className: props.className,
       title,
       fields,
@@ -27,18 +27,6 @@ export default class Form extends Block {
   }
 
   render() {
-    const template = Handlebars.compile(FormTemplate)
-    return template({
-      ...this.props,
-      title: this.props.title.render(),
-      fields: this.props.fields.map((field) => field.render()),
-      button: this.props.button.render(),
-      link: this.props.link.render(),
-    });
-  }
-
-  update() {
-    this._createResources();
-    this._render();
+    return FormTemplate
   }
 }

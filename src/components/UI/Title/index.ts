@@ -7,16 +7,10 @@ import TitleTemplate from './title.hbs?raw';
 export default class Title extends Block {
 
   constructor(props) {
-    super("div", props);
+    super(props);
   }
 
   render() {
-    const template = Handlebars.compile(TitleTemplate);
-    return template(this.props);
-  }
-  
-  update() {
-    this._createResources();
-    this._render();
+    return TitleTemplate;
   }
 }

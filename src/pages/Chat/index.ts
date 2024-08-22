@@ -53,23 +53,13 @@ export default class Chat extends Block {
     const chatNav = new ChatNav();
     const contactItems = chatItemProps.map((item) => new ChatItem(item));
     
-    super('div', {
+    super({
       chatNav, 
       contactItems,
     });
   }
 
   render() {
-    const template = Handlebars.compile(ChatTemplate)
-    return template({
-      ...this.props,
-      chatNav: this.props.chatNav.render(),
-      contactItems: this.props.contactItems.map((item) => item.render()),
-    });
-  }
-
-  update() {
-    this._createResources();
-    this._render();
+    return ChatTemplate;
   }
 }

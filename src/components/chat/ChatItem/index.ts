@@ -7,16 +7,10 @@ import ChatItemTemplate from './chatItem.hbs?raw';
 export default class ChatItem extends Block {
 
   constructor(props) {
-    super("div", props);
+    super(props);
   }
 
   render() {
-    const template = Handlebars.compile(ChatItemTemplate);
-    return template(this.props);
-  }
-  
-  update() {
-    this._createResources();
-    this._render();
+    return ChatItemTemplate;
   }
 }

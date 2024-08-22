@@ -4,7 +4,7 @@ import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import SignupTemplate from './signup.hbs?raw';
 
-import TestForm from '../../components/UI/Form';
+import Form from '../../components/UI/Form';
 
 export default class Signup extends Block {
 
@@ -17,7 +17,7 @@ export default class Signup extends Block {
       {name:"password", labelValue:"Пароль", type:"password", autocomplete:"off"},
       {name:"password_confirm", labelValue:"Пароль (ещё раз)", type:"password", autocomplete:"off"},
     ]
-    const signupForm = new TestForm({
+    const signupForm = new Form({
       className: 'signupForm',
       title: { titleContent: 'Регистрация' },
       fields: fieldProps,
@@ -25,18 +25,12 @@ export default class Signup extends Block {
       link: { linkContent: 'Войти' },
     });
     
-    super('div', { signupForm });
-  }
-
-  render() {
-    const template = Handlebars.compile(SignupTemplate)
-    return template({
-      ...this.props,
-      signupForm: this.props.signupForm.render(),
+    super({
+      signupForm
     });
   }
 
-  update() {
-    this._element.innerHTML = this.render();
+  render() {
+    return SignupTemplate;
   }
 }
