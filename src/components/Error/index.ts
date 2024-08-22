@@ -4,30 +4,25 @@ import Block from '../../utils/Block';
 import Handlebars from 'handlebars';
 import ErrorTemplate from './error.hbs?raw';
 
-import TestLink from '../UI/Link';
+import Link from '../UI/Link';
 
 export default class Error extends Block {
 
   constructor(props) {
-    const link = new TestLink(props.link);
+    const link = new Link(props.link);
 
-    super("div", {
+    super({
+      // ...props,
       errorTitle: props.errorTitle,
       errorDescription: props.errorDescription,
       link,
+      events: {
+        click: () => console.log('event')
+      }
     });
   }
 
   render() {
-    const template = Handlebars.compile(ErrorTemplate);
-    return template({
-      ...this.props,
-      link: this.props.link.render(),
-    });
-  }
-  
-  update() {
-    this._createResources();
-    this._render();
+    return ErrorTemplate;
   }
 }

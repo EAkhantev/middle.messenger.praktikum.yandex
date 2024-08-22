@@ -1,6 +1,6 @@
-// @ts-nocheck
-import EventBus from '../EventBus'
-import { compile } from 'handlebars';
+//@ts-nocheck
+import EventBus from "../EventBus";
+import Handlebars from "handlebars";
 
 export default class Block {
   static EVENTS = {
@@ -11,18 +11,25 @@ export default class Block {
   };
 
   _element = null;
-  _meta = null;
+  _id = Math.floor(100000 + Math.random() * 900000);
 
-  constructor(tagName: string = "div", props = {}) {
+  constructor(propsWithChildren = {}) {
     const eventBus = new EventBus();
+    const {props, children, lists} = this._getChildrenPropsAndProps(propsWithChildren);
+    this.props = this._makePropsProxy({...props});
+    this.children = children;
+    this.lists = lists;
+    this.name = '';
     this.eventBus = () => eventBus;
-    this._meta = {
-      tagName,
-      props
-    };
-    this.props = this._makePropsProxy(props);
-    this._registerEvents(this.eventBus());
-    this.eventBus().emit(Block.EVENTS.INIT);
+    this._registerEvents(eventBus);
+    eventBus.emit(Block.EVENTS.INIT);
+  }
+
+  _addEvents() {
+    const {events = {}} = this.props;
+    Object.keys(events).forEach(eventName => {
+      this._element.addEventListener(eventName, events[eventName]);
+    });
   }
 
   _registerEvents(eventBus) {
@@ -32,18 +39,13 @@ export default class Block {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
-    const { tagName } = this._meta;
-    this._element = this._createDocumentElement(tagName);
-  }
-
   init() {
-    this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   _componentDidMount() {
     this.componentDidMount();
+    Object.values(this.children).forEach(child => {child.dispatchComponentDidMount();});
   }
 
   componentDidMount(oldProps) {}
@@ -54,71 +56,155 @@ export default class Block {
 
   _componentDidUpdate(oldProps, newProps) {
     const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    if (!response) {
+      return;
     }
+    this._render();
   }
 
   componentDidUpdate(oldProps, newProps) {
     return true;
   }
 
-  setProps(nextProps) {
+  _getChildrenPropsAndProps(propsAndChildren) {
+    const children = {};
+    const props = {};
+    const lists = {};
+
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof Block) {
+        children[key] = value;
+      } else if(Array.isArray(value)) {
+        lists[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+
+    return {children, props, lists};
+  }
+
+  addAttributes() {
+    const {attr = {}} = this.props;
+
+    Object.entries(attr).forEach(([key, value]) => {
+      this._element.setAttribute(key, value);
+    });
+  }
+
+  setProps = nextProps => {
     if (!nextProps) return;
 
-    const oldProps = { ...this.props };
     Object.assign(this.props, nextProps);
-    this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, nextProps);
-  };
+  }
 
   get element() {
     return this._element;
   }
 
   _render() {
-    const block = this.render();
-    // console.log(block);
+    // console.log("Render")
+    const propsAndStubs = { ...this.props };
+    const _tmpId =  Math.floor(100000 + Math.random() * 900000);
+
+    Object.entries(this.children).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    });
+
+    Object.entries(this.lists).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="__l_${_tmpId}"></div>`;
+    });
+
+
+    if (this.name === 'ProfileForm') {
+      console.log('Initiale template');
+      console.log(this.render());
+      console.log('##############');
+      console.log('propsAndStubs', propsAndStubs);
+    }
     
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
+    const fragment = this._createDocumentElement('template');
+    fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
+    
+    if (this.name === 'ProfileForm') {
+      console.log(fragment.innerHTML);
+    }
+
+
+    //comment if you want to see
+    Object.values(this.children).forEach(child => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`)
+      stub.replaceWith(child.getContent());
+    });
+
+    Object.entries(this.lists).forEach(([key, child]) => {      
+      if (this.name === 'ProfileForm') {
+        console.log('lists', this.lists);
+        console.log('[key, child]', [key, child]);
+      }
+      
+      const listCont = this._createDocumentElement('template');
+      child.forEach(item => {
+        if (item instanceof Block) {
+            listCont.content.append(item.getContent());
+        } else {
+            listCont.content.append(`${item}`);
+        }
+      });
+      
+      const stub = fragment.content.querySelector(`[data-id="__l_${_tmpId}"]`);
+      stub.replaceWith(listCont.content);
+    });
+
+    const newElement = fragment.content.firstElementChild;
+    if (this._element) {
+      this._element.replaceWith(newElement);
+    }
+    this._element = newElement;
+    this._addEvents();
+    this.addAttributes();
   }
 
   render() {}
 
   getContent() {
+    this.update();
     return this.element;
   }
 
   _makePropsProxy(props) {
+    const self = this;
+
     return new Proxy(props, {
-      set: (target, prop, value) => {
-        if (prop in target) {
-          target[prop] = value;
-          this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
-        } else {
-          throw new Error("Нет доступа");
-        }
+      get(target, prop) {
+        const value = target[prop];
+        return typeof value === "function" ? value.bind(target) : value;
+      },
+      set(target, prop, value) {
+        const oldTarget = {...target};
+        target[prop] = value;
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
-      deleteProperty: () => {
-        throw new Error("Нет доступа");
+      deleteProperty() {
+        throw new Error('No access');
       }
     });
   }
 
   _createDocumentElement(tagName) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }
 
   show() {
-    this._element.style.display = "block";
+    this.getContent().style.display = "block";
   }
 
   hide() {
-    this._element.style.display = "none";
+    this.getContent().style.display = "none";
+  }
+
+  update() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, this.props, this.props);
   }
 }

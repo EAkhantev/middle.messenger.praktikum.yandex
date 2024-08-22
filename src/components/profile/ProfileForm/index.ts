@@ -11,29 +11,23 @@ import ProfileAction from '../ProfileAction';
 export default class ProfileForm extends Block {
 
   constructor(props) {
-    const avatar = new ProfileAvatar(props.avatar);
-    const fields = props.fields.map((field) => new ProfileInput(field));
-    const actions = props.actions.map((action) => new ProfileAction(action));
+    const profileAvatar = new ProfileAvatar(props.avatar);
+    const profileInputs = props.fields.map((field) => new ProfileInput(field));
+    const profileActions = props.actions.map((action) => new ProfileAction(action));   
 
-    super('div', {
-      avatar,
-      fields,
-      actions,
+    super({
+      // ...props,
+      profileAvatar,
+      profileInputs,
+      profileActions,
     });
   }
 
   render() {
-    const template = Handlebars.compile(ProfileFormTemplate)
-    return template({
-      ...this.props,
-      profileAvatar: this.props.avatar.render(),
-      profileInputs: this.props.fields.map((field) => field.render()),
-      profileActions: this.props.actions.map((action) => action.render()),
-    });
+    return ProfileFormTemplate;
   }
 
-  update() {
-    this._createResources();
-    this._render();
+  init() {
+    this.name = 'ProfileForm';
   }
 }

@@ -31,23 +31,18 @@ export default class Profile extends Block {
       actions: profileActionProps,
     })
     
-    super('div', { 
+    super({
+      // ...props,
       btnHideSide,
       profileForm,
     });
   }
 
   render() {
-    const template = Handlebars.compile(ProfileTemplate)
-    return template({
-      ...this.props,
-      btnHideSide: this.props.btnHideSide.render(),
-      profileForm: this.props.profileForm.render(),
-    });
+    return ProfileTemplate;
   }
 
-  update() {
-    this._createResources();
-    this._render();
+  init() {
+    this.name = 'Profile';
   }
 }

@@ -5,28 +5,29 @@ import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Page404 from "./pages/Page404";
 import Page500 from "./pages/Page500";
+import Error from "./components/Error";
 
 const rootElement = document.getElementById('root');
 const navigation = document.querySelector('.page-list');
 
-const loginPage = new Login();
-const signupPage = new Signup();
-const chatPage = new Chat();
+// const loginPage = new Login();
+// const signupPage = new Signup();
+// const chatPage = new Chat();
 const profile = new Profile();
 const page404 = new Page404();
 const page500 = new Page500();
 
 const setPage = (path) => {
   switch (path) {
-    case '/login':
-      rootElement.replaceChildren(loginPage.getContent());
-      break;
-    case '/signup':
-      rootElement.replaceChildren(signupPage.getContent());
-      break;
-    case '/chat':
-      rootElement.replaceChildren(chatPage.getContent());
-      break;
+    // case '/login':
+    //   rootElement.replaceChildren(loginPage.getContent());
+    //   break;
+    // case '/signup':
+    //   rootElement.replaceChildren(signupPage.getContent());
+    //   break;
+    // case '/chat':
+    //   rootElement.replaceChildren(chatPage.getContent());
+    //   break;
     case '/profile':
       rootElement.replaceChildren(profile.getContent());
       break;
@@ -47,12 +48,18 @@ window.addEventListener('DOMContentLoaded', () => {
   setPage(path);
 });
 
-navigation.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
   event.preventDefault();
   const target = event.target;
-  // console.log('click', target);
+  const isLink = target.closest('a');
 
   if (target.classList.contains('route-link')) {
+    const href = target.getAttribute('href');
+    window.history.pushState({}, '', href);
+    setPage(href);
+  }
+
+  if (isLink) {
     const href = target.getAttribute('href');
     window.history.pushState({}, '', href);
     setPage(href);
@@ -85,9 +92,14 @@ document.addEventListener('focusout', (event) => {
 });
 
 setTimeout(() => {
-  loginPage.props.loginForm.props.button.setProps({
-    buttonContent: 'Войти',
-  });
-  loginPage._element.innerHTML = loginPage.render();
+  page500.children.page500.setProps({errorDescription: 'Потом пофиксим'});
+}, 1000);
 
-}, 3000); 
+setTimeout(() => {
+  page500.children.page500.children.link.setProps({linkContent: 'ПШЛНХЙ'});
+}, 2000);
+
+// setTimeout(() => {
+//   window.history.pushState({}, '', '/page500');
+//   setPage('/page500');
+// }, 3000);

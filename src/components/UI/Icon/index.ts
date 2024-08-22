@@ -7,16 +7,17 @@ import IconTemplate from './icon.hbs?raw';
 export default class Icon extends Block {
 
   constructor(props) {
-    super("div", props);
+    super(props);
   }
 
   render() {
-    const template = Handlebars.compile(IconTemplate);
-    return template(this.props);
+    return IconTemplate;
+    // const template = Handlebars.compile(IconTemplate);
+    // return template(this.props);
   }
   
-  update() {
-    this._createResources();
-    this._render();
-  }
+  // update() {
+  //   this._createResources();
+  //   this._render();
+  // }
 }

@@ -11,20 +11,12 @@ export default class ProfileAction extends Block {
   constructor(props) {    
     const link = new Link(props);
 
-    super('div', {
+    super({
       link,
     });
   }
 
   render() {
-    const template = Handlebars.compile(ProfileActionTemplate)
-    return template({
-      ...this.props,
-      link: this.props.link.render(),
-    });
-  }
-
-  update() {
-    this._element.innerHTML = this.render();
+    return ProfileActionTemplate
   }
 }

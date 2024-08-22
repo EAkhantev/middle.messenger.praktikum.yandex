@@ -14,19 +14,23 @@ export default class Page404 extends Block {
       link: {linkContent: 'Назад к чатам', href: '/chat'},
     });
     
-    super('div', { page404 });
-  }
-
-  render() {
-    const template = Handlebars.compile(Page404Template)
-    return template({
-      ...this.props,
-      page404: this.props.page404.render(),
+    super({ 
+      ...props,
+      page404
     });
   }
 
-  update() {
-    this._createResources();
-    this._render();
+  render() {
+    return Page404Template
+    // const template = Handlebars.compile(Page404Template)
+    // return template({
+    //   ...this.props,
+    //   page404: this.props.page404.render(),
+    // });
   }
+
+  // update() {
+  //   this._createResources();
+  //   this._render();
+  // }
 }

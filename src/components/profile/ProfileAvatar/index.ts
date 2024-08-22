@@ -7,16 +7,17 @@ import ProfileAvatarTemplate from './profileAvatar.hbs?raw';
 export default class ProfileAvatar extends Block {
 
   constructor(props) {
-    super("div", props);
+    super(props);
   }
 
   render() {
-    const template = Handlebars.compile(ProfileAvatarTemplate);
-    return template(this.props);
+    return ProfileAvatarTemplate
+    // const template = Handlebars.compile(ProfileAvatarTemplate);
+    // return template(this.props);
   }
   
-  update() {
-    this._createResources();
-    this._render();
-  }
+  // update() {
+  //   this._createResources();
+  //   this._render();
+  // }
 }
