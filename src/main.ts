@@ -5,10 +5,8 @@ import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import Page404 from "./pages/Page404";
 import Page500 from "./pages/Page500";
-import Error from "./components/Error";
 
 const rootElement = document.getElementById('root');
-const navigation = document.querySelector('.page-list');
 
 const loginPage = new Login();
 const signupPage = new Signup();

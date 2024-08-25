@@ -11,9 +11,9 @@ export default class Page500 extends Block {
     const page500 = new Error({
       errorTitle: '500',
       errorDescription: 'Мы уже фиксим',
-      link: {linkContent: 'Назад к чатам', href: '/chat'},
+      link: { linkContent: 'Назад к чатам', href: '/chat' },
     });
-    
+
     super({
       // ...props,
       page500,
