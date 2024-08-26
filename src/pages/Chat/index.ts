@@ -1,15 +1,12 @@
-// @ts-nocheck
 import './chat.scss';
 import Block from '../../utils/Block';
-import Handlebars from 'handlebars';
 import ChatTemplate from './chat.hbs?raw';
 
 import ChatNav from '../../components/chat/ChatNav';
 import ChatItem from '../../components/chat/ChatItem';
 
 export default class Chat extends Block {
-
-  constructor(props) {
+  constructor() {
     const chatItemProps = [
       {
         contactName: 'Jay-Z',
@@ -49,12 +46,12 @@ export default class Chat extends Block {
           'Ты красавчик, круто ты вырубил меня на последнем спаринге )) Как нибудь повторим',
         msgCount: '12',
       },
-    ]
+    ];
     const chatNav = new ChatNav();
     const contactItems = chatItemProps.map((item) => new ChatItem(item));
-    
+
     super({
-      chatNav, 
+      chatNav,
       contactItems,
     });
   }

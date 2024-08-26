@@ -7,7 +7,10 @@
     </div>
     <div class="contact-info">
       <p class="msg-last">
-        {{#if youSelf}}<b>Вы: </b>{{/if}}{{msgContent}}
+        {{#if youSelf}}
+          <b>Вы: </b>
+        {{/if}}
+        {{msgContent}}
       </p>
       <p class="msg-count"><span>{{msgCount}}</span></p>
     </div>

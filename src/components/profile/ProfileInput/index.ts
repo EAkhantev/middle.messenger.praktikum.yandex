@@ -1,23 +1,15 @@
-// @ts-nocheck
 import './profileInput.scss';
 import Block from '../../../utils/Block';
-import Handlebars from 'handlebars';
 import ProfileInputTemplate from './profileInput.hbs?raw';
 
-export default class ProfileInput extends Block {
+import { ProfileInputProps } from '../../../interfaces/component.interfaces';
 
-  constructor(props) {
+export default class ProfileInput extends Block {
+  constructor(props: ProfileInputProps) {
     super(props);
   }
 
   render() {
-    return ProfileInputTemplate
-    // const template = Handlebars.compile(ProfileInputTemplate);
-    // return template(this.props);
+    return ProfileInputTemplate;
   }
-  
-  // update() {
-  //   this._createResources();
-  //   this._render();
-  // }
 }

@@ -1,12 +1,11 @@
-// @ts-nocheck
 import './link.scss';
 import Block from '../../../utils/Block';
-import Handlebars from 'handlebars';
 import LinkTemplate from './link.hbs?raw';
 
-export default class Link extends Block {
+import { LinkProps } from '../../../interfaces/component.interfaces';
 
-  constructor(props) {
+export default class Link extends Block {
+  constructor(props: LinkProps) {
     super(props);
   }
 
@@ -14,4 +13,3 @@ export default class Link extends Block {
     return LinkTemplate;
   }
 }
-

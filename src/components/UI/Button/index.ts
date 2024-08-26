@@ -1,12 +1,11 @@
-// @ts-nocheck
 import './button.scss';
 import Block from '../../../utils/Block';
-import Handlebars from 'handlebars';
 import ButtonTemplate from './button.hbs?raw';
 
-export default class Button extends Block {
+import { ButtonProps } from '../../../interfaces/component.interfaces';
 
-  constructor(props) {
+export default class Button extends Block {
+  constructor(props: ButtonProps) {
     super(props);
   }
 

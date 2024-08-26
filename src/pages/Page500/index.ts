@@ -1,13 +1,10 @@
-// @ts-nocheck
 import Block from '../../utils/Block';
-import Handlebars from 'handlebars';
 import Page500Template from './page500.hbs?raw';
 
-import Error from "../../components/Error";
+import Error from '../../components/Error';
 
 export default class Page500 extends Block {
-
-  constructor(props) {
+  constructor() {
     const page500 = new Error({
       errorTitle: '500',
       errorDescription: 'Мы уже фиксим',
@@ -15,7 +12,6 @@ export default class Page500 extends Block {
     });
 
     super({
-      // ...props,
       page500,
     });
   }

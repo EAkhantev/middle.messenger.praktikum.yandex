@@ -1,17 +1,16 @@
-// @ts-nocheck
 import './form.scss';
 import Block from '../../../utils/Block';
-import Handlebars from 'handlebars';
 import FormTemplate from './form.hbs?raw';
 
-import Button from '../Button';
-import Link from '../Link';
 import Title from '../Title';
 import Input from '../Input';
+import Button from '../Button';
+import Link from '../Link';
+
+import { FormProps } from '../../../interfaces/component.interfaces';
 
 export default class Form extends Block {
-
-  constructor(props) {
+  constructor(props: FormProps) {
     const title = new Title(props.title);
     const fields = props.fields.map((field) => new Input(field));
     const button = new Button(props.button);
@@ -27,6 +26,6 @@ export default class Form extends Block {
   }
 
   render() {
-    return FormTemplate
+    return FormTemplate;
   }
 }

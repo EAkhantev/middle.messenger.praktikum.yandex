@@ -1,14 +1,12 @@
-// @ts-nocheck
 import './profileAction.scss';
 import Block from '../../../utils/Block';
-import Handlebars from 'handlebars';
 import ProfileActionTemplate from './profileAction.hbs?raw';
 
 import Link from '../../UI/Link';
+import { ProfileActionProps } from '../../../interfaces/component.interfaces';
 
 export default class ProfileAction extends Block {
-
-  constructor(props) {    
+  constructor(props: ProfileActionProps) {
     const link = new Link(props);
 
     super({
@@ -17,6 +15,6 @@ export default class ProfileAction extends Block {
   }
 
   render() {
-    return ProfileActionTemplate
+    return ProfileActionTemplate;
   }
 }

@@ -1,23 +1,15 @@
-// @ts-nocheck
 import './profileAvatar.scss';
 import Block from '../../../utils/Block';
-import Handlebars from 'handlebars';
 import ProfileAvatarTemplate from './profileAvatar.hbs?raw';
 
-export default class ProfileAvatar extends Block {
+import { ProfileAvatarProps } from '../../../interfaces/component.interfaces';
 
-  constructor(props) {
+export default class ProfileAvatar extends Block {
+  constructor(props: ProfileAvatarProps) {
     super(props);
   }
 
   render() {
-    return ProfileAvatarTemplate
-    // const template = Handlebars.compile(ProfileAvatarTemplate);
-    // return template(this.props);
+    return ProfileAvatarTemplate;
   }
-  
-  // update() {
-  //   this._createResources();
-  //   this._render();
-  // }
 }
