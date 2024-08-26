@@ -1,25 +1,32 @@
 import globals from "globals";
-import tseslint from "typescript-eslint";
-import pluginJs from "@eslint/js";
+import tsLint from "typescript-eslint";
+import jsLint from "@eslint/js";
 import prettierPlugin from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default tseslint.config (
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+export default tsLint.config (
+  jsLint.configs.recommended,
+  ...tsLint.configs.recommended,
   {
     plugins: {
-      '@typescript-eslint': tseslint.plugin,
+      '@typescript-eslint': tsLint.plugin,
       prettier: prettierPlugin
+    },
+    languageOptions: {
+      parserOptions: {
+        parser: tsLint.parser,
+        tsconfigRootDir: './'
+      }
     }
   },
   {
-    ignores: ['node_modules', 'dist']
+    ignores: ['node_modules', 'dist'],
   },
   {
     languageOptions: {
-      parserOptions: {
-        project: ['tsconfig.json']
+      globals: { 
+        ...globals.browser,
+        ...globals.node 
       }
     }
   },
@@ -27,7 +34,14 @@ export default tseslint.config (
     files: ['src/**/*.{js,ts}'],
     rules: {
       ...eslintConfigPrettier.rules,
-      'prefer-const': 'error'
+      'no-var': 'error',
+      'prefer-const': 'error',
+      'no-undef': 'error',
+      'no-unused-vars': 'error',
+      'no-use-before-define': 'error',
+      'no-this-before-super': 'off',
+      'no-undef-init': 'off',
+      'prettier/prettier': 'error',
     }
   }
 );
