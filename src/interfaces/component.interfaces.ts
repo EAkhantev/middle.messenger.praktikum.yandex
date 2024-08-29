@@ -31,6 +31,7 @@ export interface ErrorProps {
   errorTitle: string;
   errorDescription: string;
   link: LinkProps;
+  events?: object;
 }
 
 export interface ChatItemProps {

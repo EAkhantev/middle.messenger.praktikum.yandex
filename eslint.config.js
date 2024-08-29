@@ -1,10 +1,10 @@
-import globals from "globals";
-import tsLint from "typescript-eslint";
-import jsLint from "@eslint/js";
+import globals from 'globals';
+import tsLint from 'typescript-eslint';
+import jsLint from '@eslint/js';
 import prettierPlugin from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
 
-export default tsLint.config (
+export default tsLint.config(
   jsLint.configs.recommended,
   ...tsLint.configs.recommended,
   {
@@ -24,9 +24,9 @@ export default tsLint.config (
   },
   {
     languageOptions: {
-      globals: { 
+      globals: {
         ...globals.browser,
-        ...globals.node 
+        ...globals.node
       }
     }
   },
@@ -37,7 +37,13 @@ export default tsLint.config (
       'no-var': 'error',
       'prefer-const': 'error',
       'no-undef': 'error',
-      'no-unused-vars': 'error',
+      'no-unused-vars': [
+        'error',
+        {
+          'vars': 'all',
+          'args': 'none'
+        }
+      ],
       'no-use-before-define': 'error',
       'no-this-before-super': 'off',
       'no-undef-init': 'off',
