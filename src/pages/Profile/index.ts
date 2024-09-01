@@ -56,9 +56,9 @@ export default class Profile extends Block {
       },
     ];
     const profileActionProps = [
-      { linkContent: 'Изменить данные', href: 'login' },
-      { linkContent: 'Изменить пароль', href: 'password' },
-      { linkContent: 'Выйти', href: 'password' },
+      { linkContent: 'Изменить данные', href: '/login' },
+      { linkContent: 'Изменить пароль', href: '/' },
+      { linkContent: 'Выйти', href: '/password' },
     ];
     const btnHideSide = new Icon();
     const profileForm = new ProfileForm({

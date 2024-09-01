@@ -9,6 +9,9 @@ export default class Page500 extends Block {
       errorTitle: '500',
       errorDescription: 'Мы уже фиксим',
       link: { linkContent: 'Назад к чатам', href: '/chat' },
+      events: {
+        click: () => console.log('click Page500'),
+      },
     });
 
     super({

@@ -71,25 +71,6 @@ window.addEventListener('popstate', () => {
   setPage(path);
 });
 
-// TODO: move this logic to Input component
-document.addEventListener('focusin', (event) => {
-  const target = event.target as HTMLInputElement;
-
-  if (target.classList.contains('input-field') && target.labels !== null) {
-    const label = target.labels[0];
-    label.classList.add('isActive');
-  }
-});
-
-document.addEventListener('focusout', (event) => {
-  const target = event.target as HTMLInputElement;
-
-  if (target.classList.contains('input-field') && target.labels !== null) {
-    const label = target.labels[0];
-    if (target.value === '') label.classList.remove('isActive');
-  }
-});
-
 setTimeout(() => {
   page500.children.page500.setProps({ errorDescription: 'Потом пофиксим' });
 }, 1000);

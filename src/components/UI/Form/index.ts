@@ -9,7 +9,7 @@ import Link from '../Link';
 
 import { FormProps } from '../../../interfaces/component.interfaces';
 
-export default class Form extends Block {
+export default class Form extends Block<FormProps> {
   constructor(props: FormProps) {
     const title = new Title(props.title);
     const fields = props.fields.map((field) => new Input(field));

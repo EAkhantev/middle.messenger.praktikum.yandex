@@ -47,7 +47,7 @@ export default class Signup extends Block {
       title: { titleContent: 'Регистрация' },
       fields: fieldProps,
       button: { buttonContent: 'Зарегистрироваться' },
-      link: { linkContent: 'Войти' },
+      link: { linkContent: 'Войти', href: '/login' },
     });
 
     super({

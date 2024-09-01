@@ -2,10 +2,15 @@ export interface TitleProps {
   titleContent: string;
 }
 
+export interface ErrorLineProps {
+  errorMessage?: string;
+}
+
 export interface InputProps {
   name: string;
   type: string;
   labelValue: string;
+  errorLine: ErrorLineProps;
   autocomplete?: string;
   isDisable?: boolean;
 }
