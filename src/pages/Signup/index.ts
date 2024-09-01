@@ -61,7 +61,7 @@ export default class Signup extends Block {
       },
     ];
     const signupForm = new Form({
-      className: 'signupForm',
+      className: 'signup-form',
       title: { titleContent: 'Регистрация' },
       fields: fieldProps,
       button: { buttonContent: 'Зарегистрироваться' },

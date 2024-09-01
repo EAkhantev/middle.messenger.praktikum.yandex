@@ -29,7 +29,7 @@ export default class Login extends Block<Form> {
       },
     ];
     const loginForm = new Form({
-      className: 'loginForm',
+      className: 'login-form',
       title: { titleContent: 'Вход' },
       fields: fieldProps,
       button: { buttonContent: 'ПШЛНХЙ' },
