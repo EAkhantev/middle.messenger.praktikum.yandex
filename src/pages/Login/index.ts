@@ -13,7 +13,7 @@ export default class Login extends Block<Form> {
         labelValue: 'Логин',
         autocomplete: 'off',
         validationRules: {
-          type: 'required',
+          required: true,
         },
       },
       {
@@ -22,7 +22,7 @@ export default class Login extends Block<Form> {
         labelValue: 'Пароль',
         autocomplete: 'new-password',
         validationRules: {
-          type: 'required',
+          required: true,
           minLength: 3,
           maxLength: 10,
         },

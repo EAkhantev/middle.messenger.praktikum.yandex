@@ -6,6 +6,7 @@ import Page404 from './pages/Page404';
 import Page500 from './pages/Page500';
 
 const rootElement = document.getElementById('root');
+const fakeRouting = document.querySelector('.page-list');
 if (!rootElement) {
   throw new Error('Root element not found');
 }
@@ -48,7 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setPage(path);
 });
 
-document.addEventListener('click', (event) => {
+fakeRouting!.addEventListener('click', (event) => {
   event.preventDefault();
   const target = event.target as HTMLElement;
   const isLink = target.closest('a');

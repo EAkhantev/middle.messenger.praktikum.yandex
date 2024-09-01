@@ -11,35 +11,53 @@ export default class Signup extends Block {
         name: 'login',
         labelValue: 'Логин',
         type: 'text',
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'first_name',
         labelValue: 'Имя',
         type: 'text',
         autocomplete: 'off',
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'second_name',
         labelValue: 'Фамилия',
         type: 'text',
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'phone',
         labelValue: 'Телефон',
         type: 'tel',
         autocomplete: 'off',
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'password',
         labelValue: 'Пароль',
         type: 'password',
         autocomplete: 'off',
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'password_confirm',
         labelValue: 'Пароль (ещё раз)',
         type: 'password',
         autocomplete: 'off',
+        validationRules: {
+          required: true,
+        },
       },
     ];
     const signupForm = new Form({

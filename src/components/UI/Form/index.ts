@@ -22,10 +22,37 @@ export default class Form extends Block<FormProps> {
       fields,
       button,
       link,
+      events: {
+        submit: (event: SubmitEvent) => this.onSubmit(event),
+      },
     });
   }
 
   render() {
     return FormTemplate;
+  }
+
+  onSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const formState = Object.fromEntries(formData.entries());
+    const formFields = this.lists.fields;
+
+    const fieldValidationStatus = formFields.reduce((acc, item) => {
+      const fieldName = item.props.name;
+      const fieldValue = formState[fieldName];
+      const inputElement = item.element.querySelector('input');
+      item.props.events.focusout({ target: inputElement });
+      const { isValid } = item.validate(fieldValue);
+      acc.push(isValid);
+      return acc;
+    }, []);
+    const isValidForm = fieldValidationStatus.every((item) => item);
+
+    if (isValidForm) {
+      console.log(`${this.props.className} state`, formState);
+    } else {
+      console.log(`Error ${this.props.className} validation`);
+    }
   }
 }

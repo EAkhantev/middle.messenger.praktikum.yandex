@@ -6,12 +6,20 @@ button {
   background: #3369f3;
   border: none;
   outline: none;
-
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   font-weight: 500;
   letter-spacing: 0.5px;
   font-size: 13px;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
   transition: all 0.3s;
+}
+
+button:active {
+  background: #008cff;
+}
+
+button:disabled {
+  background: #87b4f3;
+  cursor: auto;
 }

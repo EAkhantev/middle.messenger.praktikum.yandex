@@ -10,13 +10,14 @@ export interface InputProps {
   name: string;
   type: string;
   labelValue: string;
-  errorLine: ErrorLineProps;
+  errorLine?: ErrorLineProps;
   autocomplete?: string;
   isDisable?: boolean;
 }
 
 export interface ButtonProps {
   buttonContent: string;
+  disabled?: boolean;
 }
 
 export interface LinkProps {

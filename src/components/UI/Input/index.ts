@@ -46,21 +46,22 @@ export default class Input extends Block {
   }
 
   validate(inputValue: string) {
-    const validationRules = {
+    let errorMessage = '';
+    let isValid = true;
+    const rules = {
       required: (value: string) => value !== '',
       email: (value: string) =>
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value),
-      phone: (value: string) => /^\d{3}-\d{3}-\d{4}$/.test(value),
+      phone: (value: string) => /^((\+7|7|8)+([0-9]){10})$/.test(value),
       minlength: (value: string, length: number) => value.length >= length,
       maxlength: (value: string, length: number) => value.length <= length,
     };
 
-    const { type, minLength, maxLength } = this.props.validationRules;
-    let isValid = true;
-    let errorMessage = '';
+    if (!this.props.validationRules) return { isValid, errorMessage };
 
+    const { type, required, minLength, maxLength } = this.props.validationRules;
     if (maxLength) {
-      const result = validationRules.maxlength(inputValue, maxLength);
+      const result = rules.maxlength(inputValue, maxLength);
       if (!result) {
         isValid = result;
         errorMessage = `Максимальная длина должна быть не более ${maxLength} символов`;
@@ -68,7 +69,7 @@ export default class Input extends Block {
     }
 
     if (minLength) {
-      const result = validationRules.minlength(inputValue, minLength);
+      const result = rules.minlength(inputValue, minLength);
       if (!result) {
         isValid = result;
         errorMessage = `Минимальная длина должна быть не менее ${minLength} символов`;
@@ -76,7 +77,7 @@ export default class Input extends Block {
     }
 
     if (type === 'phone') {
-      const result = validationRules.phone(inputValue);
+      const result = rules.phone(inputValue);
       if (!result) {
         isValid = result;
         errorMessage = 'Некорректный номер телефона';
@@ -84,15 +85,15 @@ export default class Input extends Block {
     }
 
     if (type === 'email') {
-      const result = validationRules.email(inputValue);
+      const result = rules.email(inputValue);
       if (!result) {
         isValid = result;
         errorMessage = 'Некорректный адрес электронной почты';
       }
     }
 
-    if (type === 'required') {
-      const result = validationRules.required(inputValue);
+    if (required) {
+      const result = rules.required(inputValue);
       if (!result) {
         isValid = result;
         errorMessage = 'Это поле обязательно для заполнения';
