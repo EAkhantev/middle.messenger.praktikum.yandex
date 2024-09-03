@@ -1,5 +1,5 @@
 .edit-panel-item {
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid #eaeaea;
   padding-bottom: 10px;
 
   a {
@@ -13,4 +13,8 @@
 
 .edit-panel-item:last-child {
   border-bottom: none;
+
+  a {
+    color: #d32f2f;
+  }
 }

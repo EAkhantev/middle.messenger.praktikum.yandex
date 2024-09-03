@@ -49,7 +49,8 @@ export interface ChatItemProps {
 }
 
 export interface ProfileAvatarProps {
-  avatarTitle: string;
+  firstName: string;
+  secondName: string;
 }
 
 export interface ProfileInputProps extends InputProps {

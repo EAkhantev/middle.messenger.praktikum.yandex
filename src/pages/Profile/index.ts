@@ -7,7 +7,7 @@ import ProfileForm from '../../components/profile/ProfileForm';
 
 export default class Profile extends Block {
   constructor() {
-    const profileAvatarProps = { avatarTitle: 'Олег Захаров' };
+    const profileAvatarProps = { firstName: 'Илон', secondName: 'Маск' };
     const profileFieldProps = [
       {
         name: 'email',
@@ -56,15 +56,68 @@ export default class Profile extends Block {
       },
     ];
     const profileActionProps = [
-      { linkContent: 'Изменить данные', href: '/login' },
-      { linkContent: 'Изменить пароль', href: '/' },
-      { linkContent: 'Выйти', href: '/password' },
+      {
+        linkContent: 'Изменить данные',
+        events: {
+          click: (event: MouseEvent) => this.handleProfileDataChange(event),
+        },
+      },
+      {
+        linkContent: 'Изменить пароль',
+        events: {
+          click: (event: MouseEvent) => {
+            event.preventDefault();
+            console.log(this);
+          },
+        },
+      },
+      {
+        linkContent: 'Выйти',
+        events: {
+          click: (event: MouseEvent) => {
+            event.preventDefault();
+          },
+        },
+      },
     ];
+    // const passwordInputsProps = [
+    //   {
+    //     name: 'oldPassword',
+    //     labelValue: 'Старый пароль',
+    //     type: 'password',
+    //     defaultValue: 'test',
+    //     isDisable: false,
+    //     autocomplete: 'off',
+    //   },
+    //   {
+    //     name: 'newPassword',
+    //     labelValue: 'Новый пароль',
+    //     type: 'password',
+    //     defaultValue: 'testNew',
+    //     isDisable: false,
+    //     autocomplete: 'off',
+    //   },
+    //   {
+    //     name: 'newPasswordConfirm',
+    //     labelValue: 'Повторите новый пароль',
+    //     type: 'password',
+    //     defaultValue: 'testNew',
+    //     isDisable: false,
+    //     autocomplete: 'off',
+    //   },
+    // ];
+    const profileButtonProps = { buttonContent: 'Сохранить' };
+
     const btnHideSide = new Icon();
     const profileForm = new ProfileForm({
       avatar: profileAvatarProps,
       fields: profileFieldProps,
       actions: profileActionProps,
+      submitBtn: profileButtonProps,
+      // passwordFields: passwordInputsProps,
+      events: {
+        submit: (event: SubmitEvent) => this.onSubmit(event),
+      },
     });
 
     super({
@@ -77,7 +130,44 @@ export default class Profile extends Block {
     return ProfileTemplate;
   }
 
-  // init() {
-  //   this.name = 'Profile';
-  // }
+  onSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const formState = Object.fromEntries(formData.entries());
+    console.log(`profileDataForm state`, formState);
+
+    this.children.profileForm.lists.profileInputs.forEach((item) => {
+      const itemElement = item.element.querySelector('.input-profile');
+      const itemValue = itemElement.value;
+      item.setProps({
+        defaultValue: itemValue,
+        isDisable: true,
+      });
+
+      if (itemElement.name === 'first_name') {
+        this.children.profileForm.children.profileAvatar.setProps({
+          firstName: itemValue,
+        });
+      }
+
+      if (itemElement.name === 'second_name') {
+        this.children.profileForm.children.profileAvatar.setProps({
+          secondName: itemValue,
+        });
+      }
+    });
+    this.children.profileForm.setProps({ isEditMode: false });
+  }
+
+  handleProfileDataChange(event: MouseEvent) {
+    event.preventDefault();
+    this.children.profileForm.lists.profileInputs.forEach((item) => {
+      item.setProps({ isDisable: false });
+    });
+    this.children.profileForm.setProps({ isEditMode: true });
+  }
+
+  init() {
+    this.name = 'form';
+  }
 }

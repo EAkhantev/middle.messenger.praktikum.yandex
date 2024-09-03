@@ -1,11 +1,18 @@
-<div class="profile">
+<form class="user-data-form">
   {{{ profileAvatar }}}
-  <form class="user-data-form">
-    <ul class="user-data-list">
+  <ul class="user-data-list">
+    {{{ profileInputs }}}
+    {{!-- {{#if isChangeCredo}} 
+      {{{ passwordInputs }}}
+    {{else}}
       {{{ profileInputs }}}
-    </ul>
-    <ul class="edit-panel-list">
+    {{/if}} --}}
+  </ul>
+  <ul class="edit-panel-list">
+    {{#if isEditMode}} 
+      {{{ profileButton }}}
+    {{else}}
       {{{ profileActions }}}
-    </ul>
-  </form>
-</div>
+    {{/if}}
+  </ul>
+</form>

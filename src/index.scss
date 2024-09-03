@@ -7,6 +7,8 @@
 body {
   font-family: MuseoModerno, sans-serif;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {

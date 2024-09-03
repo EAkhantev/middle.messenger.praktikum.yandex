@@ -6,7 +6,10 @@ import { LinkProps } from '../../../interfaces/component.interfaces';
 
 export default class Link extends Block {
   constructor(props: LinkProps) {
-    super(props);
+    super({
+      linkContent: props.linkContent,
+      events: props.events,
+    });
   }
 
   render() {

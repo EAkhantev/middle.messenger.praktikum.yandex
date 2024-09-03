@@ -144,7 +144,7 @@ export default class Block<T> {
       propsAndStubs[key] = `<div data-id="__l_${_tmpId}"></div>`;
     });
 
-    if (this.name === 'ProfileForm') {
+    if (this.name === 'form') {
       console.log('Initiale template');
       console.log(this.render());
       console.log('##############');
@@ -156,7 +156,7 @@ export default class Block<T> {
     ) as HTMLTemplateElement;
     fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
 
-    if (this.name === 'ProfileForm') {
+    if (this.name === 'form') {
       console.log(fragment.innerHTML);
     }
 
@@ -167,7 +167,7 @@ export default class Block<T> {
     });
 
     Object.entries(this.lists).forEach(([key, child]) => {
-      if (this.name === 'ProfileForm') {
+      if (this.name === 'form') {
         console.log('lists', this.lists);
         console.log('[key, child]', [key, child]);
       }
