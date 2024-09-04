@@ -73,6 +73,7 @@ window.addEventListener('popstate', () => {
   setPage(path);
 });
 
+// TODO: Можно потестить запросики
 // const request = new HttpClient();
 // request
 //   .get('https://665466ce1c6af63f4677c550.mockapi.io/item', {})

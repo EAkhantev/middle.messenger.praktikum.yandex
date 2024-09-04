@@ -8,6 +8,7 @@ export default class Link extends Block {
   constructor(props: LinkProps) {
     super({
       linkContent: props.linkContent,
+      href: props.href,
       events: props.events,
     });
   }
