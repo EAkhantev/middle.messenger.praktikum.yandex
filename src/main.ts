@@ -4,6 +4,7 @@ import Chat from './pages/Chat';
 import Profile from './pages/Profile';
 import Page404 from './pages/Page404';
 import Page500 from './pages/Page500';
+// import HttpClient from './utils/HttpClient';
 
 const rootElement = document.getElementById('root');
 const fakeRouting = document.querySelector('.page-list');
@@ -72,15 +73,23 @@ window.addEventListener('popstate', () => {
   setPage(path);
 });
 
-setTimeout(() => {
-  page500.children.page500.setProps({ errorDescription: 'Потом пофиксим' });
-}, 1000);
+// const request = new HttpClient();
+// request
+//   .get('https://665466ce1c6af63f4677c550.mockapi.io/item', {})
+//   .then((xhr) => {
+//     console.log(xhr.responseText);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
 
-setTimeout(() => {
-  page500.children.page500.children.link.setProps({ linkContent: 'ПШЛНХЙ' });
-}, 2000);
-
-// setTimeout(() => {
-//   window.history.pushState({}, '', '/page500');
-//   setPage('/page500');
-// }, 3000);
+// request
+//   .get('https://jsonplaceholder.typicode.com/posts', {
+//     data: { userId: 1, id: 1 },
+//   })
+//   .then((xhr) => {
+//     console.log(xhr.responseText);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });

@@ -4,8 +4,20 @@ import ProfileTemplate from './profile.hbs?raw';
 
 import Icon from '../../components/UI/Icon';
 import ProfileForm from '../../components/profile/ProfileForm';
+import ProfileInput from '../../components/profile/ProfileInput';
+import ProfileAvatar from '../../components/profile/ProfileAvatar';
 
-export default class Profile extends Block {
+type ProfileChildrenType = {
+  profileForm?: ProfileForm;
+  btnHideSide?: Icon;
+  profileAvatar?: ProfileAvatar;
+};
+
+type ProfileInputFieldsType = {
+  profileInputs: ProfileInput[];
+};
+
+export default class Profile extends Block<{}, ProfileChildrenType> {
   constructor() {
     const profileAvatarProps = { firstName: 'Илон', secondName: 'Маск' };
     const profileFieldProps = [
@@ -55,6 +67,32 @@ export default class Profile extends Block {
         autocomplete: 'off',
       },
     ];
+    const passwordInputsProps = [
+      {
+        name: 'oldPassword',
+        labelValue: 'Старый пароль',
+        type: 'password',
+        defaultValue: 'test',
+        isDisable: false,
+        autocomplete: 'off',
+      },
+      {
+        name: 'newPassword',
+        labelValue: 'Новый пароль',
+        type: 'password',
+        defaultValue: 'testNew',
+        isDisable: false,
+        autocomplete: 'off',
+      },
+      {
+        name: 'newPasswordConfirm',
+        labelValue: 'Повторите новый пароль',
+        type: 'password',
+        defaultValue: 'testNew',
+        isDisable: false,
+        autocomplete: 'off',
+      },
+    ];
     const profileActionProps = [
       {
         linkContent: 'Изменить данные',
@@ -68,6 +106,7 @@ export default class Profile extends Block {
           click: (event: MouseEvent) => {
             event.preventDefault();
             console.log(this);
+            this.children.profileForm?.setProps({ passwordInputsProps });
           },
         },
       },
@@ -76,36 +115,11 @@ export default class Profile extends Block {
         events: {
           click: (event: MouseEvent) => {
             event.preventDefault();
+            console.log(this);
           },
         },
       },
     ];
-    // const passwordInputsProps = [
-    //   {
-    //     name: 'oldPassword',
-    //     labelValue: 'Старый пароль',
-    //     type: 'password',
-    //     defaultValue: 'test',
-    //     isDisable: false,
-    //     autocomplete: 'off',
-    //   },
-    //   {
-    //     name: 'newPassword',
-    //     labelValue: 'Новый пароль',
-    //     type: 'password',
-    //     defaultValue: 'testNew',
-    //     isDisable: false,
-    //     autocomplete: 'off',
-    //   },
-    //   {
-    //     name: 'newPasswordConfirm',
-    //     labelValue: 'Повторите новый пароль',
-    //     type: 'password',
-    //     defaultValue: 'testNew',
-    //     isDisable: false,
-    //     autocomplete: 'off',
-    //   },
-    // ];
     const profileButtonProps = { buttonContent: 'Сохранить' };
 
     const btnHideSide = new Icon();
@@ -114,9 +128,8 @@ export default class Profile extends Block {
       fields: profileFieldProps,
       actions: profileActionProps,
       submitBtn: profileButtonProps,
-      // passwordFields: passwordInputsProps,
       events: {
-        submit: (event: SubmitEvent) => this.onSubmit(event),
+        submit: (event: Event) => this.onSubmit(event as SubmitEvent),
       },
     });
 
@@ -132,42 +145,52 @@ export default class Profile extends Block {
 
   onSubmit(event: SubmitEvent) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const formState = Object.fromEntries(formData.entries());
-    console.log(`profileDataForm state`, formState);
+    if (event.target) {
+      const formData = new FormData(event.target as HTMLFormElement);
+      const formState = Object.fromEntries(formData.entries());
+      console.log(`profileDataForm state`, formState);
+    }
 
-    this.children.profileForm.lists.profileInputs.forEach((item) => {
-      const itemElement = item.element.querySelector('.input-profile');
-      const itemValue = itemElement.value;
+    (
+      this.children.profileForm?.lists as ProfileInputFieldsType
+    ).profileInputs.forEach((item) => {
+      const itemElement = item.element?.querySelector('.input-profile');
+      const itemValue = (itemElement as HTMLInputElement).value;
       item.setProps({
         defaultValue: itemValue,
         isDisable: true,
       });
 
-      if (itemElement.name === 'first_name') {
-        this.children.profileForm.children.profileAvatar.setProps({
+      if ((itemElement as HTMLInputElement).name === 'first_name') {
+        (
+          this.children.profileForm?.children as ProfileChildrenType
+        ).profileAvatar?.setProps({
           firstName: itemValue,
         });
       }
 
-      if (itemElement.name === 'second_name') {
-        this.children.profileForm.children.profileAvatar.setProps({
+      if ((itemElement as HTMLInputElement).name === 'second_name') {
+        (
+          this.children.profileForm?.children as ProfileChildrenType
+        ).profileAvatar?.setProps({
           secondName: itemValue,
         });
       }
     });
-    this.children.profileForm.setProps({ isEditMode: false });
+    this.children.profileForm?.setProps({ isEditMode: false });
   }
 
   handleProfileDataChange(event: MouseEvent) {
     event.preventDefault();
-    this.children.profileForm.lists.profileInputs.forEach((item) => {
+    (
+      this.children.profileForm?.lists as ProfileInputFieldsType
+    ).profileInputs.forEach((item) => {
       item.setProps({ isDisable: false });
     });
-    this.children.profileForm.setProps({ isEditMode: true });
+    this.children.profileForm?.setProps({ isEditMode: true });
   }
 
   init() {
-    this.name = 'form';
+    this.name = '';
   }
 }

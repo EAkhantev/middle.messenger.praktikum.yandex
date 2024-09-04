@@ -13,9 +13,6 @@ export default class Error extends Block {
       errorTitle: props.errorTitle,
       errorDescription: props.errorDescription,
       link,
-      // events: {
-      //   click: () => console.log('click'),
-      // },
       events: props.events,
     });
   }
@@ -25,6 +22,6 @@ export default class Error extends Block {
   }
 
   init() {
-    this.name = 'Error';
+    this.name = '';
   }
 }

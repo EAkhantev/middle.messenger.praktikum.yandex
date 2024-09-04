@@ -1,3 +1,5 @@
+import ErrorLine from '../components/UI/ErrorLine/errorLine';
+
 export interface TitleProps {
   titleContent: string;
 }
@@ -10,9 +12,15 @@ export interface InputProps {
   name: string;
   type: string;
   labelValue: string;
-  errorLine?: ErrorLineProps;
+  errorLine?: ErrorLine;
   autocomplete?: string;
   isDisable?: boolean;
+  validationRules?: {
+    type?: string;
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+  };
 }
 
 export interface ButtonProps {
@@ -22,6 +30,7 @@ export interface ButtonProps {
 
 export interface LinkProps {
   linkContent: string;
+  events?: object;
   href?: string;
 }
 

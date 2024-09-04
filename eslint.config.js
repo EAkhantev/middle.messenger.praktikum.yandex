@@ -44,10 +44,12 @@ export default tsLint.config(
           'args': 'none'
         }
       ],
-      'no-use-before-define': 'error',
+      'no-use-before-define': 'off',
       'no-this-before-super': 'off',
       'no-undef-init': 'off',
       'prettier/prettier': 'error',
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
     }
   }
 );

@@ -3,10 +3,11 @@ import Block from '../../utils/Block';
 import LoginTemplate from './login.hbs?raw';
 
 import Form from '../../components/UI/Form';
+import { InputProps } from '../../interfaces/component.interfaces';
 
-export default class Login extends Block<Form> {
+export default class Login extends Block {
   constructor() {
-    const fieldProps = [
+    const fieldProps: InputProps[] = [
       {
         name: 'login',
         type: 'text',
@@ -32,7 +33,7 @@ export default class Login extends Block<Form> {
       className: 'login-form',
       title: { titleContent: 'Вход' },
       fields: fieldProps,
-      button: { buttonContent: 'ПШЛНХЙ' },
+      button: { buttonContent: 'Авторизоваться' },
       link: { linkContent: 'Нет аккаунта?', href: '/signup' },
     });
 

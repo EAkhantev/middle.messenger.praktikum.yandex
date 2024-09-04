@@ -4,7 +4,7 @@ import IconTemplate from './icon.hbs?raw';
 
 export default class Icon extends Block {
   constructor() {
-    super();
+    super({});
   }
 
   render() {

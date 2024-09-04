@@ -1,14 +1,32 @@
 import EventBus from '../EventBus';
 import Handlebars from 'handlebars';
-import {
-  AttrProps,
-  BlockChildren,
-  BlockLists,
-  BlockProps,
-  NewEvent,
-} from './types';
+import { AttrProps, NewEvent } from './types';
 
-export default class Block<T> {
+type EventType = {
+  [key: string]: (event: Event) => void;
+};
+
+export type PropsType = {
+  events?: EventType;
+  className?: string | string[];
+  [key: string]: Block<PropsType> | Block<PropsType>[] | string | unknown;
+};
+
+type PropsTypeOrEmptyObject = Partial<PropsType> & {};
+
+type ChildrenType = {
+  [key: string]: Block<PropsType>;
+};
+
+export type ListsType = {
+  [key: string]: Block<PropsType> | string[];
+};
+
+export default class Block<
+  Props extends Partial<PropsType> = {},
+  Children extends Partial<ChildrenType> = {},
+  Lists extends Partial<ListsType> = {},
+> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -19,18 +37,18 @@ export default class Block<T> {
   public _id: number = Math.floor(100000 + Math.random() * 900000);
   public name: string;
   private _element: HTMLElement | null = null;
-  private props: BlockProps<T>;
-  private children: BlockChildren<T>;
-  private lists: BlockLists<T>;
-  private eventBus: () => EventBus<T>;
+  props: Props;
+  children: Children;
+  lists: Lists;
+  private eventBus: () => EventBus<{ [key: string]: string }>;
 
-  constructor(propsWithChildren: { [key: string]: T } = {}) {
+  constructor(propsWithChildren: Props & Children & Lists) {
     const eventBus = new EventBus();
     const { props, children, lists } =
       this._getChildrenPropsAndProps(propsWithChildren);
 
     this.name = '';
-    this.props = this._makePropsProxy({ ...props });
+    this.props = this._makePropsProxy({ ...props } as Props);
     this.children = children;
     this.lists = lists;
     this.eventBus = () => eventBus;
@@ -55,7 +73,7 @@ export default class Block<T> {
     });
   }
 
-  _registerEvents(eventBus: EventBus<T>) {
+  _registerEvents(eventBus: EventBus<{ [key: string]: string }>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -69,7 +87,7 @@ export default class Block<T> {
   _componentDidMount() {
     this.componentDidMount();
     Object.values(this.children).forEach((child) => {
-      child.dispatchComponentDidMount();
+      child?.dispatchComponentDidMount();
     });
   }
 
@@ -91,14 +109,14 @@ export default class Block<T> {
     return true;
   }
 
-  _getChildrenPropsAndProps(propsAndChildren: { [key: string]: T }): {
-    children: BlockChildren<T>;
-    props: BlockProps<T>;
-    lists: BlockLists<T>;
+  _getChildrenPropsAndProps(propsAndChildren: Props & Children & Lists): {
+    children: Children;
+    props: Props;
+    lists: Lists;
   } {
-    const children: BlockChildren<T> = {};
-    const props: BlockProps<T> = {};
-    const lists: BlockLists<T> = {};
+    const children: {} & Partial<ChildrenType> = {};
+    const props: {} & Partial<PropsType> = {};
+    const lists: {} & ListsType = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -110,7 +128,11 @@ export default class Block<T> {
       }
     });
 
-    return { children, props, lists };
+    return {
+      children: children as Children,
+      props: props as Props,
+      lists: lists as Lists,
+    };
   }
 
   addAttributes() {
@@ -121,7 +143,7 @@ export default class Block<T> {
     });
   }
 
-  setProps = (nextProps: { [key: string]: T }) => {
+  setProps = (nextProps: Props) => {
     if (!nextProps) return;
 
     Object.assign(this.props, nextProps);
@@ -132,12 +154,11 @@ export default class Block<T> {
   }
 
   _render() {
-    // console.log("Render")
-    const propsAndStubs = { ...this.props };
+    const propsAndStubs: PropsTypeOrEmptyObject = { ...this.props };
     const _tmpId = Math.floor(100000 + Math.random() * 900000);
 
     Object.entries(this.children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+      propsAndStubs[key] = `<div data-id="${child?._id}"></div>`;
     });
 
     Object.entries(this.lists).forEach(([key]) => {
@@ -160,10 +181,9 @@ export default class Block<T> {
       console.log(fragment.innerHTML);
     }
 
-    //comment if you want to see
     Object.values(this.children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-      stub?.replaceWith(child.getContent()!);
+      const stub = fragment.content.querySelector(`[data-id="${child?._id}"]`);
+      stub?.replaceWith(child?.getContent()!);
     });
 
     Object.entries(this.lists).forEach(([key, child]) => {
@@ -175,13 +195,17 @@ export default class Block<T> {
       const listCont = this._createDocumentElement(
         'template',
       ) as HTMLTemplateElement;
-      child.forEach((item) => {
-        if (item instanceof Block) {
-          listCont.content.append(item.getContent()!);
-        } else {
-          listCont.content.append(`${item}`);
-        }
-      });
+      if (Array.isArray(child)) {
+        child.forEach((item) => {
+          if ((item as unknown as Block<PropsType, {}, {}>) instanceof Block) {
+            listCont.content.append(
+              (item as unknown as Block<PropsType, {}, {}>).getContent()!,
+            );
+          } else {
+            listCont.content.append(`${item}`);
+          }
+        });
+      }
 
       const stub = fragment.content.querySelector(`[data-id="__l_${_tmpId}"]`);
       stub?.replaceWith(listCont.content);
@@ -198,12 +222,12 @@ export default class Block<T> {
 
   render() {}
 
-  getContent(): HTMLElement | null {
+  getContent(): HTMLElement {
     this.update();
-    return this.element;
+    return this.element!;
   }
 
-  _makePropsProxy(props: BlockProps<T>) {
+  _makePropsProxy(props: Props) {
     return new Proxy(props, {
       get: (target, prop: string) => {
         const value = target[prop];
@@ -211,13 +235,13 @@ export default class Block<T> {
           ? (value as () => void).bind(target)
           : value;
       },
-      set: (target, prop: string, value) => {
+      set: (target: PropsTypeOrEmptyObject, prop: string, value) => {
         const oldTarget = { ...target };
         target[prop] = value;
         this.eventBus().emit(
           Block.EVENTS.FLOW_CDU,
-          oldTarget as T,
-          target as T,
+          oldTarget as { [key: string]: string },
+          target as { [key: string]: string },
         );
         return true;
       },
@@ -242,8 +266,8 @@ export default class Block<T> {
   update() {
     this.eventBus().emit(
       Block.EVENTS.FLOW_CDU,
-      this.props as T,
-      this.props as T,
+      this.props as { [key: string]: string },
+      this.props as { [key: string]: string },
     );
   }
 }

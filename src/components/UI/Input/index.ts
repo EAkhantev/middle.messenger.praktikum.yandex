@@ -2,24 +2,35 @@ import './input.scss';
 import Block from '../../../utils/Block';
 import InputTemplate from './input.hbs?raw';
 
-import { InputProps } from '../../../interfaces/component.interfaces';
 import ErrorLine from '../ErrorLine/errorLine';
 
-export default class Input extends Block {
-  constructor(props: InputProps) {
+export type InputPropsType = {
+  name?: string;
+  validationRules?: {
+    type?: string;
+    required?: boolean;
+    minLength?: number;
+    maxLength?: number;
+  };
+  errorLine?: ErrorLine;
+  events?: { [key: string]: (event: Event) => void };
+};
+
+export default class Input extends Block<InputPropsType> {
+  constructor(props: InputPropsType) {
     const messageValidation = new ErrorLine({ errorMessage: '' });
     super({
       ...props,
       errorLine: messageValidation,
       events: {
-        focusin: (event: FocusEvent) => {
+        focusin: (event: Event) => {
           const target = event.target as HTMLInputElement;
           if (target.labels) {
             const label = target.labels[0];
             label.classList.add('active');
           }
         },
-        focusout: (event: FocusEvent) => {
+        focusout: (event: Event) => {
           const target = event.target as HTMLInputElement;
           if (target.labels) {
             const label = target.labels[0];

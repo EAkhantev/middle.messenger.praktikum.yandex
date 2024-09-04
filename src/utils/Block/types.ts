@@ -1,11 +1,5 @@
-import Block from '.';
-
 export interface BlockProps<T> {
   [key: string]: T | string;
-}
-
-export interface BlockChildren<T> {
-  [key: string]: Block<T>;
 }
 
 export interface BlockLists<T> {
