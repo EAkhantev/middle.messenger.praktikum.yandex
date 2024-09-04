@@ -1,15 +1,17 @@
+@import "../../../colors";
+
 .user-data-item {
   display: flex;
   justify-content: space-between;
   min-width: 510px;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid $border-color;
   padding-bottom: 10px;
   
   label {
     font-family: Inter, sans-serif;
     font-weight: 500;
     font-size: 13px;
-    color: #1e1e1e;
+    color: $text-dark-color;
   }
   
   input {
@@ -19,12 +21,12 @@
     font-weight: 500;
     font-size: 13px;
     text-align: right;
-    color: #1e1e1e;
+    color: $text-dark-color;
   }
   
   input:disabled{
     background-color: transparent;
-    color: #999;
+    color: $text-light-color;
   }
 }
 

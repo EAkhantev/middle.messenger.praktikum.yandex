@@ -1,15 +1,17 @@
+@import "../../../colors";
+
 .card-contact {
   display: flex;
   justify-content: space-between;
   column-gap: 10px;
   max-width: 290px;
-  border-bottom: 1px solid #EAEAEA;
+  border-bottom: 1px solid $border-color;
   padding: 12px 0;
   
   .contact-avatar {
     width: 47px;
     height: 47px;
-    background-color: #EFEFEF;
+    background-color: $bg-input-color;
     border-radius: 50%;
     flex: none;
   }
@@ -30,7 +32,7 @@
       font-weight: 600;
       font-size: 13px;
       line-height: 100%;
-      color: #1e1e1e;
+      color: $text-dark-color;
     }
     
     .msg-time {
@@ -39,7 +41,7 @@
       font-size: 9px;
       line-height: 13px;
       text-align: right;
-      color: #999;
+      color: $text-light-color;
     }
   }
   
@@ -51,6 +53,7 @@
     
     .msg-last {
       display: -webkit-box;
+      line-clamp: 2;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;  
       overflow: hidden;
@@ -58,7 +61,7 @@
       font-weight: 500;
       font-size: 12px;
       line-height: 125%;
-      color: #999;
+      color: $text-light-color;
     }
     
     .msg-count {
@@ -70,9 +73,9 @@
       font-weight: 500;
       font-size: 11px;
       line-height: 20px;
-      color: #fff;
+      color: $text-btn-color;
       border-radius: 10px;
-      background-color: #3369f3;
+      background-color: $bg-container-color;
       
       span {
         margin: 0 7px;

@@ -1,7 +1,9 @@
+@import "../../../colors";
+
 .input-wrapper {
   width: 100%;
   margin: 0 auto;
-  color: #999;
+  color: $text-light-color;
   font-size: 0;
   
   label {
@@ -23,10 +25,10 @@
     font-weight: 500;
     font-size: 13px;
     background-color: transparent;
-    color: #1e1e1e;
+    color: $text-dark-color;
     outline: none;
     border: none;
-    border-bottom: 1px solid #3369F3;
+    border-bottom: 1px solid $bg-container-color;
     padding: 10px 40px 4px 0;
   }
 
@@ -37,6 +39,6 @@
   }
 
   .error-validation {
-    border-bottom: 1px solid #d32f2f;
+    border-bottom: 1px solid $text-error-color;
   }
 }

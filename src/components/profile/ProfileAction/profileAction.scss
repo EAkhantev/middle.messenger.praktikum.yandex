@@ -1,12 +1,14 @@
+@import "../../../colors";
+
 .edit-panel-item {
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid $border-color;
   padding-bottom: 10px;
 
   a {
     font-family: Inter, sans-serif;
     font-weight: 500;
     font-size: 13px;
-    color: #3369f3;
+    color: $bg-container-color;
     text-decoration: none;
   }
 }
@@ -15,6 +17,6 @@
   border-bottom: none;
 
   a {
-    color: #d32f2f;
+    color: $text-error-color;
   }
 }

@@ -6,7 +6,7 @@ type EventType = {
   [key: string]: (event: Event) => void;
 };
 
-export type PropsType = {
+type PropsType = {
   events?: EventType;
   className?: string | string[];
   [key: string]: Block<PropsType> | Block<PropsType>[] | string | unknown;
@@ -18,7 +18,7 @@ type ChildrenType = {
   [key: string]: Block<PropsType>;
 };
 
-export type ListsType = {
+type ListsType = {
   [key: string]: Block<PropsType> | string[];
 };
 
