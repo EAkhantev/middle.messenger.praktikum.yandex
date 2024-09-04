@@ -1,0 +1,18 @@
+<form class="user-data-form">
+  {{{ profileAvatar }}}
+  <ul class="user-data-list">
+    {{{ profileInputs }}}
+    {{!-- {{#if isChangeCredo}} 
+      {{{ passwordInputs }}}
+    {{else}}
+      {{{ profileInputs }}}
+    {{/if}} --}}
+  </ul>
+  <ul class="edit-panel-list">
+    {{#if isEditMode}} 
+      {{{ profileButton }}}
+    {{else}}
+      {{{ profileActions }}}
+    {{/if}}
+  </ul>
+</form>

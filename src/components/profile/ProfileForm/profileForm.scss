@@ -1,0 +1,25 @@
+// .profile,
+.user-data-form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+}
+
+.user-data-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.edit-panel-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: 10px;
+  list-style: none;
+
+  button {
+    align-self: center;
+  }
+}

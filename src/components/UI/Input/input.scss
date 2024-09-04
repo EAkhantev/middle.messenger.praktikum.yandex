@@ -1,0 +1,44 @@
+@import "../../../colors";
+
+.input-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  color: $text-light-color;
+  font-size: 0;
+  
+  label {
+    letter-spacing: 0.5px;
+    user-select: none;
+    position: relative;
+    top: 23px;
+    transition: all 0.2s ease-in-out;
+    font-size: 13px;
+    line-height: 13px;
+    cursor: text;
+    z-index: -1;
+  }
+  
+  input {
+    width: 100%;
+    letter-spacing: 0.5px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    background-color: transparent;
+    color: $text-dark-color;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid $bg-container-color;
+    padding: 10px 40px 4px 0;
+  }
+
+  .active {
+    font-weight: 500;
+    font-size: 9px;
+    top: 5px;
+  }
+
+  .error-validation {
+    border-bottom: 1px solid $text-error-color;
+  }
+}
