@@ -57,19 +57,19 @@ export default class Block<
   }
 
   _addEvents() {
-    if (this.name === 'Page500') {
-      console.log(Object.keys(this.props));
-    }
-    if (this.name === 'Error') {
-      console.log(Object.keys(this.props));
-    }
-
     const { events = {} } = this.props;
     Object.keys(events as NewEvent).forEach((eventName) => {
       this._element?.addEventListener(
         eventName,
         (events as NewEvent)[eventName],
       );
+    });
+  }
+
+  _removeEvents() {
+    const { events = {} } = this.props;
+    Object.keys(events).forEach((eventName) => {
+      this._element?.removeEventListener(eventName, events[eventName]);
     });
   }
 
@@ -212,6 +212,7 @@ export default class Block<
     });
 
     const newElement = fragment.content.firstElementChild;
+    this._removeEvents();
     if (this._element) {
       this._element.replaceWith(newElement!);
     }

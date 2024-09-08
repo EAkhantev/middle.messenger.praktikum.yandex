@@ -1,0 +1,15 @@
+<input 
+  class="input-field"
+  type="{{ type }}"
+  id="{{ name }}"
+  name="{{ name }}"
+  {{#if defaultValue}} 
+    value="{{ defaultValue }}"
+  {{/if}}
+  {{#if isDisable}} 
+    disabled=""
+  {{/if}}
+  {{#if autocomplete}} 
+    autocomplete="{{ autocomplete }}" 
+  {{/if}}
+>

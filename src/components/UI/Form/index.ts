@@ -56,7 +56,6 @@ export default class Form extends Block<FormPropsType, {}> {
     const formData = new FormData(event.target as HTMLFormElement);
     const formState = Object.fromEntries(formData.entries());
     const formFields = (this.lists as InputFieldsType).fields;
-    console.log(this.lists);
 
     const fieldValidationStatus = formFields.reduce(
       (acc: boolean[], item: Input) => {

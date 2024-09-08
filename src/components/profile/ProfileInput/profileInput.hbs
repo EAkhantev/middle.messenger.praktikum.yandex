@@ -1,18 +1,7 @@
 <li class="user-data-item">
-  <label for="{{ name }}">{{ labelValue }}</label>
-  <input 
-    class="input-profile" 
-    type="{{ type }}" 
-    id="{{ name }}" 
-    name="{{ name }}"
-    {{#if defaultValue}} 
-      value="{{ defaultValue }}"
-    {{/if}}
-    {{#if isDisable}} 
-      disabled=""
-    {{/if}}
-    {{#if autocomplete}} 
-      autocomplete="{{ autocomplete }}" 
-    {{/if}}
-  >
+  <div class="data-item-wrapper">
+    <label for="{{ name }}">{{ labelValue }}</label>
+    {{{ inputField }}}
+  </div>
+  {{{ errorLine }}}
 </li>
