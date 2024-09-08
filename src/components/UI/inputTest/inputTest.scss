@@ -1,0 +1,22 @@
+@import "../../../colors";
+
+.input-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  color: $text-light-color;
+  font-size: 0;
+  
+  input {
+    width: 100%;
+    letter-spacing: 0.5px;
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    background-color: transparent;
+    color: $text-dark-color;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid $bg-container-color;
+    padding: 10px 40px 4px 0;
+  }
+}
