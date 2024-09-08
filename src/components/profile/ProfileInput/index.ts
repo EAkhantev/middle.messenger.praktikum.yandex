@@ -19,9 +19,12 @@ export default class ProfileInput extends Block {
       inputField,
       errorLine,
       events: {
-        focusout: () => {
-          errorLine.setProps({ errorMessage: inputField.errorMessage });
+        focusout: (event: Event) => {
+          const target = event.target as HTMLInputElement;
+          const inputValue = target.value;
+          inputField.validate(inputValue);
           this.isValid = inputField.isValid;
+          errorLine.setProps({ errorMessage: inputField.errorMessage });
         },
       },
     });

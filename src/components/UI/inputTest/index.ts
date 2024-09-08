@@ -30,8 +30,6 @@ export default class inputTest extends Block<InputPropsType> {
         blur: (event: Event) => {
           const target = event.target as HTMLInputElement;
           this.validate(target.value);
-          console.log('isValidField', this.isValid);
-          console.log('errorValidation', this.errorMessage);
         },
       },
     });

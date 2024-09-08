@@ -26,7 +26,7 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         name: 'email',
         labelValue: 'Почта',
         type: 'email',
-        defaultValue: '',
+        defaultValue: 'yandex@gmail.com',
         isDisable: true,
         autocomplete: 'off',
         validationRules: {
@@ -176,6 +176,9 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
 
     const fieldValidationStatus = formFields.reduce(
       (acc: boolean[], item: ProfileInput) => {
+        const inputField = (item.children as ProfileChildrenType).inputField;
+        const event = new FocusEvent('focusout', { bubbles: true });
+        inputField?.element?.dispatchEvent(event);
         const itemElement = item.element?.querySelector('.input-field');
         const itemValue = (itemElement as HTMLInputElement).value;
         (item.children as ProfileChildrenType).inputField?.setProps({
