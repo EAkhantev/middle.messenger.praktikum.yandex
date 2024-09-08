@@ -11,6 +11,7 @@ type ProfileChildrenType = {
   profileForm?: ProfileForm;
   btnHideSide?: Icon;
   profileAvatar?: ProfileAvatar;
+  inputField?: ProfileInput;
 };
 
 type ProfileInputFieldsType = {
@@ -25,9 +26,12 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         name: 'email',
         labelValue: 'Почта',
         type: 'email',
-        defaultValue: 'yandex@gmail.com',
+        defaultValue: '',
         isDisable: true,
         autocomplete: 'off',
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'login',
@@ -35,6 +39,9 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         type: 'text',
         defaultValue: 'ivanivanov',
         isDisable: true,
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'first_name',
@@ -43,6 +50,9 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         defaultValue: 'Илон',
         isDisable: true,
         autocomplete: 'off',
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'second_name',
@@ -50,6 +60,9 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         type: 'text',
         defaultValue: 'Маск',
         isDisable: true,
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'display_name',
@@ -57,6 +70,9 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         type: 'text',
         defaultValue: 'pussyTamer71',
         isDisable: true,
+        validationRules: {
+          required: true,
+        },
       },
       {
         name: 'phone',
@@ -65,6 +81,10 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         defaultValue: '+7 (909) 975 58 13',
         isDisable: true,
         autocomplete: 'off',
+        validationRules: {
+          minLength: 10,
+          maxLength: 15,
+        },
       },
     ];
     const passwordInputsProps = [
@@ -106,6 +126,8 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
           click: (event: MouseEvent) => {
             event.preventDefault();
             console.log(this);
+            console.log(passwordInputsProps);
+            console.log(this.children.profileForm);
             this.children.profileForm?.setProps({ passwordInputsProps });
           },
         },
@@ -145,39 +167,57 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
 
   onSubmit(event: SubmitEvent) {
     event.preventDefault();
-    if (event.target) {
-      const formData = new FormData(event.target as HTMLFormElement);
-      const formState = Object.fromEntries(formData.entries());
-      console.log(`profileDataForm state`, formState);
-    }
 
-    (
+    const formData = new FormData(event.target as HTMLFormElement);
+    const formState = Object.fromEntries(formData.entries());
+    const formFields = (
       this.children.profileForm?.lists as ProfileInputFieldsType
-    ).profileInputs.forEach((item) => {
-      const itemElement = item.element?.querySelector('.input-profile');
-      const itemValue = (itemElement as HTMLInputElement).value;
-      item.setProps({
-        defaultValue: itemValue,
-        isDisable: true,
+    ).profileInputs;
+
+    const fieldValidationStatus = formFields.reduce(
+      (acc: boolean[], item: ProfileInput) => {
+        const itemElement = item.element?.querySelector('.input-field');
+        const itemValue = (itemElement as HTMLInputElement).value;
+        (item.children as ProfileChildrenType).inputField?.setProps({
+          defaultValue: itemValue,
+        });
+
+        if ((itemElement as HTMLInputElement).name === 'first_name') {
+          (
+            this.children.profileForm?.children as ProfileChildrenType
+          ).profileAvatar?.setProps({
+            firstName: itemValue,
+          });
+        }
+
+        if ((itemElement as HTMLInputElement).name === 'second_name') {
+          (
+            this.children.profileForm?.children as ProfileChildrenType
+          ).profileAvatar?.setProps({
+            secondName: itemValue,
+          });
+        }
+
+        const isValid = item.isValid;
+        acc.push(isValid);
+        return acc;
+      },
+      [],
+    );
+
+    const isValidForm = fieldValidationStatus.every((item: boolean) => item);
+
+    if (isValidForm) {
+      console.log(`profileDataForm state`, formState);
+      formFields.forEach((field) => {
+        (field.children as ProfileChildrenType).inputField?.setProps({
+          isDisable: true,
+        });
       });
-
-      if ((itemElement as HTMLInputElement).name === 'first_name') {
-        (
-          this.children.profileForm?.children as ProfileChildrenType
-        ).profileAvatar?.setProps({
-          firstName: itemValue,
-        });
-      }
-
-      if ((itemElement as HTMLInputElement).name === 'second_name') {
-        (
-          this.children.profileForm?.children as ProfileChildrenType
-        ).profileAvatar?.setProps({
-          secondName: itemValue,
-        });
-      }
-    });
-    this.children.profileForm?.setProps({ isEditMode: false });
+      this.children.profileForm?.setProps({ isEditMode: false });
+    } else {
+      console.log(`Error profileDataForm validation`);
+    }
   }
 
   handleProfileDataChange(event: MouseEvent) {
@@ -185,7 +225,9 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
     (
       this.children.profileForm?.lists as ProfileInputFieldsType
     ).profileInputs.forEach((item) => {
-      item.setProps({ isDisable: false });
+      (item.children as ProfileChildrenType).inputField?.setProps({
+        isDisable: false,
+      });
     });
     this.children.profileForm?.setProps({ isEditMode: true });
   }
