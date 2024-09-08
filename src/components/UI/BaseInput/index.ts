@@ -1,6 +1,6 @@
-import './inputTest.scss';
+import './baseInput.scss';
 import Block from '../../../utils/Block';
-import InputTemplate from './inputTest.hbs?raw';
+import InputTemplate from './baseInput.hbs?raw';
 
 import ErrorLine from '../ErrorLine/errorLine';
 
@@ -16,7 +16,7 @@ export type InputPropsType = {
   events?: { [key: string]: (event: Event) => void };
 };
 
-export default class inputTest extends Block<InputPropsType> {
+export default class BaseInput extends Block<InputPropsType> {
   public errorMessage = '';
   public isValid = true;
 

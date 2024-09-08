@@ -82,8 +82,7 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         isDisable: true,
         autocomplete: 'off',
         validationRules: {
-          minLength: 10,
-          maxLength: 15,
+          required: true,
         },
       },
     ];
@@ -179,9 +178,22 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
         const inputField = (item.children as ProfileChildrenType).inputField;
         const event = new FocusEvent('focusout', { bubbles: true });
         inputField?.element?.dispatchEvent(event);
-        const itemElement = item.element?.querySelector('.input-field');
+
+        const isValid = item.isValid;
+        acc.push(isValid);
+        return acc;
+      },
+      [],
+    );
+
+    const isValidForm = fieldValidationStatus.every((item: boolean) => item);
+
+    if (isValidForm) {
+      console.log(`profileDataForm state`, formState);
+      formFields.forEach((field) => {
+        const itemElement = field.element?.querySelector('.input-field');
         const itemValue = (itemElement as HTMLInputElement).value;
-        (item.children as ProfileChildrenType).inputField?.setProps({
+        (field.children as ProfileChildrenType).inputField?.setProps({
           defaultValue: itemValue,
         });
 
@@ -201,18 +213,6 @@ export default class Profile extends Block<{}, ProfileChildrenType> {
           });
         }
 
-        const isValid = item.isValid;
-        acc.push(isValid);
-        return acc;
-      },
-      [],
-    );
-
-    const isValidForm = fieldValidationStatus.every((item: boolean) => item);
-
-    if (isValidForm) {
-      console.log(`profileDataForm state`, formState);
-      formFields.forEach((field) => {
         (field.children as ProfileChildrenType).inputField?.setProps({
           isDisable: true,
         });
