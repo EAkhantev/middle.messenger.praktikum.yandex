@@ -1,0 +1,46 @@
+@import "../../../colors";
+
+.user-data-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 510px;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 10px;
+
+  .data-item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    
+    label {
+      font-family: Inter, sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      color: $text-dark-color;
+    }
+    
+    input {
+      outline: none;
+      border: none;
+      font-family: Inter, sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-align: right;
+      color: $text-dark-color;
+      background-color: $bg-input-color;
+    }
+    
+    input:disabled{
+      background-color: transparent;
+      color: $text-light-color;
+    }
+  }
+
+  .sub-msg-valid {
+    text-align: center;
+    padding-bottom: 0;
+  }
+}
+
+.user-data-item:last-child {
+  border-bottom: none;
+}

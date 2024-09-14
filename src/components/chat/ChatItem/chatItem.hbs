@@ -1,0 +1,18 @@
+<li class="card-contact">
+  <div class="contact-avatar"></div>
+  <div class="wrapper-msg">
+    <div class="contact-data">
+      <p class="msg-name">{{contactName}}</p>
+      <p class="msg-time">{{msgDateTime}}</p>
+    </div>
+    <div class="contact-info">
+      <p class="msg-last">
+        {{#if youSelf}}
+          <b>Вы: </b>
+        {{/if}}
+        {{msgContent}}
+      </p>
+      <p class="msg-count"><span>{{msgCount}}</span></p>
+    </div>
+  </div>
+</li>

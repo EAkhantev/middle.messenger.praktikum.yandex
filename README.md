@@ -17,6 +17,9 @@ Funny Web Messenger is a full-fledged SPA application written in pure JavaScript
 ### Install dependencies
 `npm install`
 
+### Run lint check
+`npm run lint`
+
 ### Start the development server
 `npm run dev`
 

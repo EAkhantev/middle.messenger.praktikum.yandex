@@ -1,0 +1,13 @@
+<form class="user-data-form">
+  {{{ profileAvatar }}}
+  <ul class="user-data-list">
+    {{{ profileInputs }}}
+  </ul>
+  <ul class="edit-panel-list">
+    {{#if isEditMode}} 
+      {{{ profileButton }}}
+    {{else}}
+      {{{ profileActions }}}
+    {{/if}}
+  </ul>
+</form>

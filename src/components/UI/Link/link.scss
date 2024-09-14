@@ -1,0 +1,11 @@
+@import "../../../colors";
+
+.navigation-link {
+  text-decoration: none;
+  outline: none;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  color: $bg-container-color;
+}

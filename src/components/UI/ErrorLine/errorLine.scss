@@ -1,0 +1,11 @@
+@import "../../../colors";
+
+.sub-msg-valid {
+  font-size: 11px;
+  color: $text-error-color;
+  line-height: 11px;
+  font-weight: 400 !important;
+  padding-top: 4px;
+  padding-bottom: 5px;
+  transition: all 0.2s ease-in-out;
+}
